@@ -404,15 +404,15 @@ function sydneyOperaHouse() {
 
 // color is RGB 0..1
 export const WONDERS = [
-  { name: 'Turtle Tower', build: turtleTower, color: [1.0, 0.84, 0.1], fact: 'Hoan Kiem Lake, Hanoi · 8.5 m' },
-  { name: 'Eiffel Tower', build: eiffelTower, color: [1.0, 0.35, 0.95], fact: 'Paris · 330 m · 125 m base' },
-  { name: 'Statue of Liberty', build: statueOfLiberty, color: [0.3, 1.0, 0.45], fact: 'New York · 93 m ground to torch' },
-  { name: 'Burj Khalifa', build: burjKhalifa, color: [0.3, 0.6, 1.0], fact: 'Dubai · 828 m · Y-plan, 27 setbacks' },
-  { name: 'Great Pyramid', build: pyramidGiza, color: [1.0, 0.62, 0.2], fact: 'Giza · 146.6 m · 230.3 m base' },
-  { name: 'Colosseum', build: colosseum, color: [1.0, 0.45, 0.3], fact: 'Rome · 189 × 156 m · 48.5 m' },
-  { name: 'Leaning Tower of Pisa', build: leaningTowerPisa, color: [0.3, 0.95, 1.0], fact: 'Pisa · 56.7 m · 3.97° tilt' },
-  { name: 'Taj Mahal', build: tajMahal, color: [1.0, 0.78, 0.9], fact: 'Agra · 73 m on a 95 m plinth' },
-  { name: 'Big Ben', build: bigBen, color: [1.0, 0.8, 0.45], fact: 'London · 96 m · 7 m clock dials' },
-  { name: 'Christ the Redeemer', build: christRedeemer, color: [0.85, 0.92, 1.0], fact: 'Rio · 30 m statue · 28 m arm span' },
-  { name: 'Sydney Opera House', build: sydneyOperaHouse, color: [0.95, 0.95, 0.8], fact: 'Sydney · shells up to 67 m' },
+  { name: 'Turtle Tower', build: turtleTower, color: [1.0, 0.84, 0.1], fact: 'Hồ Hoàn Kiếm, Hà Nội · 8,5 m' },
+  { name: 'Eiffel Tower', build: eiffelTower, color: [1.0, 0.35, 0.95], fact: 'Paris · 330 m · đáy 125 m' },
+  { name: 'Statue of Liberty', build: statueOfLiberty, color: [0.3, 1.0, 0.45], fact: 'New York · cao 93 m từ đất đến ngọn đuốc' },
+  { name: 'Burj Khalifa', build: burjKhalifa, color: [0.3, 0.6, 1.0], fact: 'Dubai · 828 m · mặt bằng chữ Y, 27 tầng thu nhỏ' },
+  { name: 'Great Pyramid', build: pyramidGiza, color: [1.0, 0.62, 0.2], fact: 'Giza · 146,6 m · đáy 230,3 m' },
+  { name: 'Colosseum', build: colosseum, color: [1.0, 0.45, 0.3], fact: 'Rome · 189 × 156 m · cao 48,5 m' },
+  { name: 'Leaning Tower of Pisa', build: leaningTowerPisa, color: [0.3, 0.95, 1.0], fact: 'Pisa · 56,7 m · nghiêng 3,97°' },
+  { name: 'Taj Mahal', build: tajMahal, color: [1.0, 0.78, 0.9], fact: 'Agra · 73 m trên nền cao 95 m' },
+  { name: 'Big Ben', build: bigBen, color: [1.0, 0.8, 0.45], fact: 'London · 96 m · mặt đồng hồ 7 m' },
+  { name: 'Christ the Redeemer', build: christRedeemer, color: [0.85, 0.92, 1.0], fact: 'Rio · tượng cao 30 m · sải tay 28 m' },
+  { name: 'Sydney Opera House', build: sydneyOperaHouse, color: [0.95, 0.95, 0.8], fact: 'Sydney · mái vỏ cao tới 67 m' },
 ];

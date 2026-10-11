@@ -49,21 +49,21 @@ function motorcycle() {
   const radiator = [box([44, 62, 0], [3, 24, 28], 0.8, 3)];
   for (let y = 52; y <= 72; y += 4) radiator.push(line([45.6, y, -13], [45.6, y, 13], 0, 2));
   return [
-    G('Front wheel', COL.white, [85, -15, 0], 0.1, wheel(72), { info: 'tyre, spoked rim and hub' }),
-    G('Rear wheel', COL.white, [-95, -15, 0], 0.1, wheel(-72), { info: 'the chain drives this wheel' }),
-    G('Disc brakes', COL.red, [70, 0, 45], 0.15, brake(72), { info: 'calipers squeeze steel discs to stop' }),
+    G('Front wheel', COL.white, [85, -15, 0], 0.1, wheel(72), { info: 'lốp, vành căm và moay-ơ' }),
+    G('Rear wheel', COL.white, [-95, -15, 0], 0.1, wheel(-72), { info: 'xích truyền lực cho bánh này' }),
+    G('Disc brakes', COL.red, [70, 0, 45], 0.15, brake(72), { info: 'kẹp phanh ép đĩa thép để dừng xe' }),
     G('Disc brakes (L)', COL.red, [-80, 0, 45], 0.15, brake(-72), { showLabel: false }),
-    G('Front fork & handlebar', COL.silver, [45, 60, 0], 0.05, fork, { info: 'steers and soaks up bumps' }),
-    G('Fuel tank', [1.0, 0.3, 0.25], [10, 85, 0], 0, tank, { info: '~17 litres of petrol' }),
-    G('Seat', COL.purple, [-25, 80, 0], 0, seat, { info: 'foam saddle over the rear frame' }),
-    G('V-twin engine', COL.orange, [0, -60, 85], 0.15, engine, { info: 'two cylinders in a 45 degree V' }),
-    G('Frame', COL.steel, [0, 15, -95], 0.25, frame, { info: 'steel trellis that holds everything' }),
-    G('Swingarm & rear shock', COL.lime, [-50, -30, -60], 0.15, swing, { info: 'lets the rear wheel ride over bumps' }),
-    G('Exhaust', COL.amber, [0, -30, 95], 0.1, exhaust, { info: 'carries hot gases out, muffles noise' }),
-    G('Chain & sprockets', COL.gold, [-30, -45, 75], 0.2, chain, { info: 'carry engine power to the rear wheel' }),
-    G('Headlight & dash', COL.ice, [80, 55, 0], 0, lights, { info: 'lights and speedometer' }),
-    G('Fenders', COL.teal, [0, 50, 75], 0, fenders, { info: 'keep water and mud off' }),
-    G('Radiator', COL.cyan, [60, 5, 60], 0.1, radiator, { info: 'cools the engine' }),
+    G('Front fork & handlebar', COL.silver, [45, 60, 0], 0.05, fork, { info: 'dẫn hướng và hấp thụ xóc' }),
+    G('Fuel tank', [1.0, 0.3, 0.25], [10, 85, 0], 0, tank, { info: '~17 lít xăng' }),
+    G('Seat', COL.purple, [-25, 80, 0], 0, seat, { info: 'yên xốp phía trên khung sau' }),
+    G('V-twin engine', COL.orange, [0, -60, 85], 0.15, engine, { info: 'hai xi-lanh xếp hình chữ V 45 độ' }),
+    G('Frame', COL.steel, [0, 15, -95], 0.25, frame, { info: 'khung giàn thép giữ mọi thứ lại với nhau' }),
+    G('Swingarm & rear shock', COL.lime, [-50, -30, -60], 0.15, swing, { info: 'giúp bánh sau vượt qua chỗ xóc' }),
+    G('Exhaust', COL.amber, [0, -30, 95], 0.1, exhaust, { info: 'dẫn khí nóng ra ngoài, giảm tiếng ồn' }),
+    G('Chain & sprockets', COL.gold, [-30, -45, 75], 0.2, chain, { info: 'truyền công suất động cơ tới bánh sau' }),
+    G('Headlight & dash', COL.ice, [80, 55, 0], 0, lights, { info: 'đèn và đồng hồ tốc độ' }),
+    G('Fenders', COL.teal, [0, 50, 75], 0, fenders, { info: 'chắn nước và bùn' }),
+    G('Radiator', COL.cyan, [60, 5, 60], 0.1, radiator, { info: 'làm mát động cơ' }),
   ];
 }
 
@@ -93,19 +93,19 @@ function airliner() {
   const gearP = [tube([150, -18, 0], [150, -40, 0], 1.5, 1.5, 2), torus([150, -42, 3], 4, 1.5, Z, 2), torus([150, -42, -3], 4, 1.5, Z, 2)];
   for (const s of [-1, 1]) gearP.push(tube([-5, -12, s * 20], [-5, -40, s * 20], 2, 2, 2), torus([-5, -42, s * 16], 6, 2, Z, 2), torus([-5, -42, s * 24], 6, 2, Z, 2));
   return [
-    G('Fuselage', [0.9, 0.93, 1.0], [0, 95, 0], 0, upper, { info: 'pressurised tube with the cabin inside' }),
+    G('Fuselage', [0.9, 0.93, 1.0], [0, 95, 0], 0, upper, { info: 'thân hình ống có điều áp, khoang hành khách bên trong' }),
     G('Fuselage (lower)', [0.9, 0.93, 1.0], [0, -95, 0], 0, lower, { showLabel: false }),
-    G('Cabin & seats', COL.purple, [0, 0, 0], 0.3, cabin, { info: 'room for up to 180 passengers' }),
-    G('Wings', COL.steel, [0, 15, 115], 0.1, wing(1), { info: 'make the lift; fuel is stored inside' }),
+    G('Cabin & seats', COL.purple, [0, 0, 0], 0.3, cabin, { info: 'chỗ cho tối đa 180 hành khách' }),
+    G('Wings', COL.steel, [0, 15, 115], 0.1, wing(1), { info: 'tạo lực nâng; nhiên liệu chứa bên trong' }),
     G('Wings (L)', COL.steel, [0, 15, -115], 0.1, wing(-1), { showLabel: false }),
-    G('Flaps & ailerons', COL.cyan, [-25, 25, 160], 0.15, flaps(1), { info: 'extend for landing, roll the plane' }),
+    G('Flaps & ailerons', COL.cyan, [-25, 25, 160], 0.15, flaps(1), { info: 'duỗi ra khi hạ cánh, giúp máy bay lăn' }),
     G('Flaps & ailerons (L)', COL.cyan, [-25, 25, -160], 0.15, flaps(-1), { showLabel: false }),
-    G('Engines (turbofans)', COL.orange, [30, -80, 55], 0.15, engine(1), { info: 'each pushes with ~120 kN of thrust' }),
+    G('Engines (turbofans)', COL.orange, [30, -80, 55], 0.15, engine(1), { info: 'mỗi động cơ đẩy với lực ~120 kN' }),
     G('Engines (L)', COL.orange, [30, -80, -55], 0.15, engine(-1), { showLabel: false }),
-    G('Vertical tail & rudder', COL.red, [-60, 90, 0], 0.1, fin, { info: 'keeps it straight; the rudder yaws' }),
-    G('Horizontal stabilisers', COL.lime, [-60, 40, 85], 0.1, stab(1), { info: 'elevators pitch the nose up and down' }),
+    G('Vertical tail & rudder', COL.red, [-60, 90, 0], 0.1, fin, { info: 'giữ máy bay đi thẳng; bánh lái hướng làm máy bay lệch hướng' }),
+    G('Horizontal stabilisers', COL.lime, [-60, 40, 85], 0.1, stab(1), { info: 'bánh lái độ cao nâng và hạ mũi máy bay' }),
     G('Horizontal stabilisers (L)', COL.lime, [-60, 40, -85], 0.1, stab(-1), { showLabel: false }),
-    G('Landing gear', COL.gold, [0, -130, 0], 0.2, gearP, { info: 'folds up into the belly after take-off' }),
+    G('Landing gear', COL.gold, [0, -130, 0], 0.2, gearP, { info: 'thu vào bụng máy bay sau khi cất cánh' }),
   ];
 }
 
@@ -129,24 +129,24 @@ function saturnV() {
   const IU = [revolve([350, 355], [16.8, 16.8], { density: 2.5 })];
   const W = [0.95, 0.95, 1.0];
   return [
-    G('Launch escape tower', COL.red, [0, 290, 0], 0, les, { info: 'rocket that yanks the crew to safety' }),
-    G('Command module', COL.silver, [0, 235, 0], 0.02, cm, { info: 'crew capsule: the only part that came home' }),
-    G('Service module', COL.steel, [0, 190, 0], 0.04, sm, { info: 'power, oxygen and the main engine' }),
-    G('Lunar module', COL.gold, [70, 150, 0], 0.08, lm, { info: 'landed two astronauts on the Moon' }),
-    G('Spacecraft adapter', COL.ice, [0, 140, 70], 0.06, sla(FRONT), { info: 'panels opened like petals to free the LM' }),
+    G('Launch escape tower', COL.red, [0, 290, 0], 0, les, { info: 'tên lửa kéo phi hành đoàn thoát hiểm' }),
+    G('Command module', COL.silver, [0, 235, 0], 0.02, cm, { info: 'khoang phi hành đoàn: phần duy nhất trở về' }),
+    G('Service module', COL.steel, [0, 190, 0], 0.04, sm, { info: 'điện, oxy và động cơ chính' }),
+    G('Lunar module', COL.gold, [70, 150, 0], 0.08, lm, { info: 'đưa hai phi hành gia đáp xuống Mặt Trăng' }),
+    G('Spacecraft adapter', COL.ice, [0, 140, 70], 0.06, sla(FRONT), { info: 'các tấm mở ra như cánh hoa để giải phóng tàu đổ bộ LM' }),
     G('Spacecraft adapter (back)', COL.ice, [0, 140, -70], 0.06, sla(BACK), { showLabel: false }),
-    G('Instrument unit', COL.cyan, [0, 112, 0], 0.1, IU, { info: 'ring holding the guidance computer' }),
-    G('Third stage (S-IVB)', W, [0, 90, 60], 0.1, s4, { info: 'fired twice: to orbit, then to the Moon' }),
+    G('Instrument unit', COL.cyan, [0, 112, 0], 0.1, IU, { info: 'vòng chứa máy tính dẫn đường' }),
+    G('Third stage (S-IVB)', W, [0, 90, 60], 0.1, s4, { info: 'đốt hai lần: lên quỹ đạo, rồi bay tới Mặt Trăng' }),
     G('Third stage (back)', W, [0, 90, -60], 0.1, s4b, { showLabel: false }),
-    G('Third-stage tanks', COL.teal, [0, 80, 0], 0.15, [tank(300, 345, 15), tank(286, 294, 15), bell([0, 280, 0], 0.4)], { info: 'liquid hydrogen + liquid oxygen, one J-2' }),
-    G('Second stage (S-II)', W, [0, 40, 65], 0.1, shell(168, 268, 20, FRONT), { info: 'five engines, burned for 6 minutes' }),
+    G('Third-stage tanks', COL.teal, [0, 80, 0], 0.15, [tank(300, 345, 15), tank(286, 294, 15), bell([0, 280, 0], 0.4)], { info: 'hydro lỏng + oxy lỏng, một động cơ J-2' }),
+    G('Second stage (S-II)', W, [0, 40, 65], 0.1, shell(168, 268, 20, FRONT), { info: 'năm động cơ, đốt trong 6 phút' }),
     G('Second stage (back)', W, [0, 40, -65], 0.1, shell(168, 268, 20, BACK), { showLabel: false }),
-    G('Second-stage tanks', COL.cyan, [0, 30, 0], 0.15, [tank(206, 260, 18), tank(184, 196, 18)], { info: 'hydrogen chilled to -253 degrees C' }),
-    G('J-2 engines', COL.amber, [0, 5, 0], 0.2, J2, { info: 'hydrogen-burning upper-stage engines' }),
-    G('First stage (S-IC)', W, [0, -30, 75], 0.1, [...shell(0, 168, 20, FRONT), fins], { info: '35,000 kN of thrust at lift-off' }),
+    G('Second-stage tanks', COL.cyan, [0, 30, 0], 0.15, [tank(206, 260, 18), tank(184, 196, 18)], { info: 'hydro được làm lạnh tới -253 độ C' }),
+    G('J-2 engines', COL.amber, [0, 5, 0], 0.2, J2, { info: 'động cơ tầng trên đốt hydro' }),
+    G('First stage (S-IC)', W, [0, -30, 75], 0.1, [...shell(0, 168, 20, FRONT), fins], { info: 'lực đẩy 35.000 kN khi cất cánh' }),
     G('First stage (back)', W, [0, -30, -75], 0.1, shell(0, 168, 20, BACK), { showLabel: false }),
-    G('First-stage tanks', COL.orange, [0, -40, 0], 0.15, [tank(20, 62, 18), tank(78, 158, 18)], { info: 'kerosene (RP-1) and liquid oxygen' }),
-    G('F-1 engines', [1.0, 0.55, 0.2], [0, -120, 0], 0.2, F1, { info: 'most powerful single-nozzle engines ever flown' }),
+    G('First-stage tanks', COL.orange, [0, -40, 0], 0.15, [tank(20, 62, 18), tank(78, 158, 18)], { info: 'dầu hỏa (RP-1) và oxy lỏng' }),
+    G('F-1 engines', [1.0, 0.55, 0.2], [0, -120, 0], 0.2, F1, { info: 'động cơ một vòi phun mạnh nhất từng bay' }),
   ];
 }
 
@@ -190,22 +190,22 @@ function wristwatch() {
   const strap = (s) => [paramSurface((t, w) => [w * 95, s * (235 + 320 * t), -30 - 90 * t * t], 0, 1, -1, 1, { density: 0.45, gu: 20, gv: 6 }),
     ...(s < 0 ? [dots(linspace(0.3, 0.8, 6).map((t) => [0, -(235 + 320 * t), -30 - 90 * t * t + 1]), 3, 2)] : [])];
   return [
-    G('Sapphire crystal', COL.ice, [0, 0, 470], 0, crystal, { info: 'scratch-proof sapphire glass' }),
-    G('Bezel', COL.gold, [0, 0, 390], 0.02, bezel, { info: 'rotating ring to time events' }),
-    G('Hands', COL.white, [0, 0, 310], 0.05, hands, { info: 'hour, minute and seconds' }),
-    G('Dial', [0.4, 0.55, 1.0], [0, 0, 230], 0.08, dial, { info: 'the face with its hour markers' }),
-    G('Bridges', COL.silver, [0, 0, 155], 0.15, bridges, { info: 'plates that hold the gear pivots' }),
-    G('Jewels (rubies)', COL.red, [0, 0, 180], 0.17, jewels, { info: 'synthetic rubies: friction-free bearings' }),
-    G('Balance wheel & hairspring', COL.cyan, [70, 50, 110], 0.25, balance, { info: 'the heartbeat: swings 8 times a second' }),
-    G('Escapement', COL.pink, [80, -70, 90], 0.27, escape, { info: 'lets the gears advance one tick at a time' }),
-    G('Gear train', COL.amber, [0, -20, 60], 0.3, train, { info: 'steps the power down to drive the hands' }),
-    G('Mainspring barrel', COL.lime, [-90, 45, 40], 0.3, barrel, { info: 'coiled spring storing ~40 h of power' }),
-    G('Main plate', COL.steel, [0, 0, -90], 0.2, plate, { info: 'foundation of the movement' }),
-    G('Winding rotor', COL.orange, [0, 0, -200], 0.1, rotor, { info: 'your wrist motion winds the spring' }),
-    G('Case back', COL.silver, [0, 0, -310], 0, back, { info: 'screw-down back with a see-through window' }),
-    G('Case & lugs', [0.85, 0.88, 0.95], [0, 0, 0], 0, caseP, { info: 'steel case that seals out water' }),
-    G('Crown & stem', COL.gold, [150, 0, 0], 0, crown, { info: 'wind the watch and set the time' }),
-    G('Strap', [0.9, 0.55, 0.35], [0, 170, -40], 0, strap(1), { info: 'leather strap' }),
+    G('Sapphire crystal', COL.ice, [0, 0, 470], 0, crystal, { info: 'kính sapphire chống xước' }),
+    G('Bezel', COL.gold, [0, 0, 390], 0.02, bezel, { info: 'vòng xoay để đo thời gian' }),
+    G('Hands', COL.white, [0, 0, 310], 0.05, hands, { info: 'kim giờ, kim phút và kim giây' }),
+    G('Dial', [0.4, 0.55, 1.0], [0, 0, 230], 0.08, dial, { info: 'mặt số với các vạch giờ' }),
+    G('Bridges', COL.silver, [0, 0, 155], 0.15, bridges, { info: 'các tấm giữ trục của bánh răng' }),
+    G('Jewels (rubies)', COL.red, [0, 0, 180], 0.17, jewels, { info: 'ruby nhân tạo: ổ trục không ma sát' }),
+    G('Balance wheel & hairspring', COL.cyan, [70, 50, 110], 0.25, balance, { info: 'trái tim của đồng hồ: dao động 8 lần mỗi giây' }),
+    G('Escapement', COL.pink, [80, -70, 90], 0.27, escape, { info: 'cho bánh răng tiến từng nhịp một' }),
+    G('Gear train', COL.amber, [0, -20, 60], 0.3, train, { info: 'giảm lực để truyền động cho các kim' }),
+    G('Mainspring barrel', COL.lime, [-90, 45, 40], 0.3, barrel, { info: 'lò xo cuộn trữ năng lượng ~40 giờ' }),
+    G('Main plate', COL.steel, [0, 0, -90], 0.2, plate, { info: 'nền tảng của bộ máy' }),
+    G('Winding rotor', COL.orange, [0, 0, -200], 0.1, rotor, { info: 'cử động cổ tay của bạn lên dây cót' }),
+    G('Case back', COL.silver, [0, 0, -310], 0, back, { info: 'nắp lưng vặn ren có cửa sổ trong suốt' }),
+    G('Case & lugs', [0.85, 0.88, 0.95], [0, 0, 0], 0, caseP, { info: 'vỏ thép chống nước' }),
+    G('Crown & stem', COL.gold, [150, 0, 0], 0, crown, { info: 'lên dây cót và chỉnh giờ' }),
+    G('Strap', [0.9, 0.55, 0.35], [0, 170, -40], 0, strap(1), { info: 'dây da' }),
     G('Strap (L)', [0.9, 0.55, 0.35], [0, -170, -40], 0, strap(-1), { showLabel: false }),
   ];
 }
@@ -224,7 +224,7 @@ function batteryPack() {
       const z0 = mz + (j - 2) * 5.6;
       busbars.push(quad([mx - 20, 11.5, z0 - 1.2], [mx + 20, 11.5, z0 - 1.2], [mx + 20, 11.5, z0 + 1.2], [mx - 20, 11.5, z0 + 1.2], 2));
     }
-    modules.push(G('Battery modules', [0.4, 0.75, 1.0], [mx * 0.55, 40, mz * 0.9], 0.15, P, { info: '35 lithium-ion cells each, 280 in all', showLabel: first }));
+    modules.push(G('Battery modules', [0.4, 0.75, 1.0], [mx * 0.55, 40, mz * 0.9], 0.15, P, { info: 'mỗi mô-đun 35 cell lithium-ion, tổng cộng 280', showLabel: first }));
     first = false;
   }
   const snake = [];
@@ -234,22 +234,22 @@ function batteryPack() {
   const cables = [vessel([[90, 12, -34], [97, 12, -10], [100, 10, 0]], 1.8, 1.8, 2), vessel([[90, 12, 34], [97, 12, 10], [100, 10, 0]], 1.8, 1.8, 2), box([103, 8, 0], [8, 8, 16], 1, 3)];
   const lid = [quad([-100, 16, -70], [100, 16, -70], [100, 16, 70], [-100, 16, 70], 0.12), boxEdges([0, 15, 0], [200, 2, 140], 0, 2)];
   return [
-    G('Lid', [0.6, 0.65, 0.8], [0, 115, 0], 0, lid, { info: 'sealed, waterproof cover' }),
-    G('Busbars', [1.0, 0.55, 0.25], [0, 75, 0], 0.1, busbars, { info: 'copper strips that link the cells' }),
+    G('Lid', [0.6, 0.65, 0.8], [0, 115, 0], 0, lid, { info: 'nắp đậy kín, chống nước' }),
+    G('Busbars', [1.0, 0.55, 0.25], [0, 75, 0], 0.1, busbars, { info: 'thanh đồng nối các cell' }),
     ...modules,
-    G('Cooling plate', COL.cyan, [0, -40, 0], 0.15, cooling, { info: 'liquid coolant keeps the cells near 25 C' }),
-    G('Tray & crash frame', COL.steel, [0, -85, 0], 0.05, tray, { info: 'protects the cells in a crash' }),
-    G('Battery management (BMS)', COL.green, [0, 40, 115], 0.2, bms, { info: 'watches every cell: voltage and heat' }),
-    G('HV cables & connector', COL.orange, [85, 30, 0], 0.2, cables, { info: '400 V out to the motor' }),
+    G('Cooling plate', COL.cyan, [0, -40, 0], 0.15, cooling, { info: 'chất làm mát dạng lỏng giữ các cell ở gần 25 °C' }),
+    G('Tray & crash frame', COL.steel, [0, -85, 0], 0.05, tray, { info: 'bảo vệ các cell khi va chạm' }),
+    G('Battery management (BMS)', COL.green, [0, 40, 115], 0.2, bms, { info: 'giám sát từng cell: điện áp và nhiệt độ' }),
+    G('HV cables & connector', COL.orange, [85, 30, 0], 0.2, cables, { info: '400 V cấp cho động cơ điện' }),
   ];
 }
 
 export const VEHICLES2 = [
-  { name: 'Motorcycle', groups: motorcycle, color: [1.0, 0.35, 0.25], tilt: 12, viewYaw: 0.7, fact: '210 cm · V-twin · chain drive' },
-  { name: 'Airliner', groups: airliner, color: [0.6, 0.8, 1.0], tilt: 18, viewYaw: 0.6, fact: '37.6 m long · 34 m wingspan · 180 seats' },
-  { name: 'Saturn V Rocket', groups: saturnV, color: [0.95, 0.95, 1.0], tilt: 0, viewYaw: 0.4, fact: '110 m · 3 stages · took Apollo to the Moon' },
+  { name: 'Motorcycle', groups: motorcycle, color: [1.0, 0.35, 0.25], tilt: 12, viewYaw: 0.7, fact: '210 cm · V-twin · truyền động xích' },
+  { name: 'Airliner', groups: airliner, color: [0.6, 0.8, 1.0], tilt: 18, viewYaw: 0.6, fact: 'dài 37,6 m · sải cánh 34 m · 180 chỗ ngồi' },
+  { name: 'Saturn V Rocket', groups: saturnV, color: [0.95, 0.95, 1.0], tilt: 0, viewYaw: 0.4, fact: '110 m · 3 tầng · đưa Apollo lên Mặt Trăng' },
 ];
 export const MACHINES = [
-  { name: 'Mechanical Watch', groups: wristwatch, color: [1.0, 0.8, 0.4], tilt: 28, viewYaw: 0.9, fact: '40 mm · 28,800 beats per hour · ~40 h power reserve' },
-  { name: 'EV Battery Pack', groups: batteryPack, color: [0.4, 0.8, 1.0], tilt: 30, viewYaw: 0.5, fact: '8 modules · 280 cells · ~400 V' },
+  { name: 'Mechanical Watch', groups: wristwatch, color: [1.0, 0.8, 0.4], tilt: 28, viewYaw: 0.9, fact: '40 mm · 28.800 nhịp mỗi giờ · trữ năng lượng ~40 giờ' },
+  { name: 'EV Battery Pack', groups: batteryPack, color: [0.4, 0.8, 1.0], tilt: 30, viewYaw: 0.5, fact: '8 mô-đun · 280 cell · ~400 V' },
 ];

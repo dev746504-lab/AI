@@ -55,17 +55,17 @@ function lungs() {
   const diaphragm = [paramSurface((r, u) => [175 * r * Math.cos(u), -118 + (52 + 10 * Math.cos(2 * u)) * (1 - r * r), 110 * r * Math.sin(u)], 0, 1, 0, TAU, { density: 0.45, gu: 16, gv: 40 })];
   const L1 = [0.55, 0.8, 1.0], L2 = [0.45, 0.65, 1.0], L3 = [0.7, 0.55, 1.0];
   return [
-    G('Right upper lobe', L1, [-160, 90, 0], 0, RU, { info: 'right lung has 3 lobes: air in, oxygen out' }),
-    G('Right middle lobe', L3, [-170, 0, 110], 0, RM, { info: 'smallest lobe, beside the heart' }),
-    G('Right lower lobe', L2, [-160, -90, -60], 0, RL, { info: 'largest lobe: most of every breath' }),
-    G('Left upper lobe', L1, [160, 90, 0], 0, LU, { info: 'only 2 lobes on the left: room for the heart' }),
-    G('Left lower lobe', L2, [160, -90, -60], 0, LL, { info: 'the cardiac notch cradles the heart' }),
-    G('Trachea (windpipe)', [0.95, 0.95, 1.0], [0, 170, 0], 0.05, trachea, { info: 'kept open by C-shaped cartilage rings' }),
-    G('Bronchial tree', [1.0, 0.85, 0.4], [0, 20, 150], 0.25, bronchi, { info: 'airways branch ~23 times to the air sacs' }),
-    G('Alveoli (air sacs)', [1.0, 0.55, 0.7], [0, -20, 230], 0.35, alveoli, { info: '~480 million sacs where oxygen enters blood' }),
-    G('Pulmonary arteries', [0.35, 0.5, 1.0], [0, 40, -150], 0.3, art, { info: 'bring used, oxygen-poor blood in' }),
-    G('Pulmonary veins', [1.0, 0.3, 0.3], [0, -40, -190], 0.3, vein, { info: 'carry fresh oxygen-rich blood out' }),
-    G('Diaphragm', [1.0, 0.5, 0.45], [0, -180, 0], 0.05, diaphragm, { info: 'dome muscle: pulls down to breathe in' }),
+    G('Right upper lobe', L1, [-160, 90, 0], 0, RU, { info: 'phổi phải có 3 thùy: khí vào, oxy ra' }),
+    G('Right middle lobe', L3, [-170, 0, 110], 0, RM, { info: 'thùy nhỏ nhất, nằm cạnh tim' }),
+    G('Right lower lobe', L2, [-160, -90, -60], 0, RL, { info: 'thùy lớn nhất: đảm nhận phần lớn mỗi hơi thở' }),
+    G('Left upper lobe', L1, [160, 90, 0], 0, LU, { info: 'bên trái chỉ có 2 thùy: để chừa chỗ cho tim' }),
+    G('Left lower lobe', L2, [160, -90, -60], 0, LL, { info: 'khuyết tim ôm lấy quả tim' }),
+    G('Trachea (windpipe)', [0.95, 0.95, 1.0], [0, 170, 0], 0.05, trachea, { info: 'được giữ mở bởi các vòng sụn hình chữ C' }),
+    G('Bronchial tree', [1.0, 0.85, 0.4], [0, 20, 150], 0.25, bronchi, { info: 'đường thở phân nhánh ~23 lần tới các túi khí' }),
+    G('Alveoli (air sacs)', [1.0, 0.55, 0.7], [0, -20, 230], 0.35, alveoli, { info: '~480 triệu túi nơi oxy đi vào máu' }),
+    G('Pulmonary arteries', [0.35, 0.5, 1.0], [0, 40, -150], 0.3, art, { info: 'đưa máu đã dùng, nghèo oxy vào' }),
+    G('Pulmonary veins', [1.0, 0.3, 0.3], [0, -40, -190], 0.3, vein, { info: 'đưa máu mới giàu oxy ra' }),
+    G('Diaphragm', [1.0, 0.5, 0.45], [0, -180, 0], 0.05, diaphragm, { info: 'cơ hình vòm: hạ xuống để hít vào' }),
   ];
 }
 
@@ -97,17 +97,17 @@ function eye() {
     muscles.push(quad(add(ins, side), sub(ins, side), add(apex, mul(side, -0.3)), add(apex, mul(side, 0.3)), 0.9));
   }
   return [
-    G('Cornea', [0.6, 0.9, 1.0], [0, 0, 190], 0, cornea, { info: 'clear window: does 2/3 of the focusing' }),
-    G('Sclera', [0.95, 0.95, 1.0], [180, 0, -20], 0, sclera(1), { info: 'tough white outer wall' }),
+    G('Cornea', [0.6, 0.9, 1.0], [0, 0, 190], 0, cornea, { info: 'cửa sổ trong suốt: đảm nhận 2/3 việc hội tụ ánh sáng' }),
+    G('Sclera', [0.95, 0.95, 1.0], [180, 0, -20], 0, sclera(1), { info: 'lớp vỏ ngoài màu trắng, dai' }),
     G('Sclera (L)', [0.95, 0.95, 1.0], [-180, 0, -20], 0, sclera(-1), { showLabel: false }),
-    G('Iris & pupil', [0.35, 0.9, 0.55], [0, 0, 135], 0.05, iris, { info: 'muscle ring that sizes the pupil' }),
-    G('Ciliary body & zonules', [1.0, 0.6, 0.4], [0, 0, 80], 0.1, ciliary, { info: 'pulls on the lens to focus' }),
-    G('Lens', [1.0, 0.92, 0.5], [0, 0, 30], 0.12, lens, { info: 'changes shape: near and far focus' }),
-    G('Vitreous humour', [0.5, 0.7, 1.0], [0, -170, 0], 0.2, vitreous, { info: 'clear gel that keeps the eye round' }),
-    G('Choroid', [0.9, 0.35, 0.5], [0, 160, -40], 0.15, choroid, { info: 'blood vessels that feed the retina' }),
-    G('Retina', [1.0, 0.55, 0.3], [0, 0, -90], 0.25, retina, { info: '~120 million rods & cones sense light' }),
-    G('Optic nerve', [1.0, 0.9, 0.3], [0, 0, -160], 0.2, nerve, { info: '1.2 million fibres carry images to the brain' }),
-    G('Eye muscles', [1.0, 0.3, 0.3], [-150, 150, -150], 0.1, muscles, { info: 'six muscles aim the eye' }),
+    G('Iris & pupil', [0.35, 0.9, 0.55], [0, 0, 135], 0.05, iris, { info: 'vòng cơ điều chỉnh kích thước đồng tử' }),
+    G('Ciliary body & zonules', [1.0, 0.6, 0.4], [0, 0, 80], 0.1, ciliary, { info: 'kéo thủy tinh thể để lấy nét' }),
+    G('Lens', [1.0, 0.92, 0.5], [0, 0, 30], 0.12, lens, { info: 'đổi hình dạng: nhìn gần và nhìn xa' }),
+    G('Vitreous humour', [0.5, 0.7, 1.0], [0, -170, 0], 0.2, vitreous, { info: 'chất gel trong suốt giữ cho mắt tròn' }),
+    G('Choroid', [0.9, 0.35, 0.5], [0, 160, -40], 0.15, choroid, { info: 'mạch máu nuôi võng mạc' }),
+    G('Retina', [1.0, 0.55, 0.3], [0, 0, -90], 0.25, retina, { info: '~120 triệu tế bào que & nón cảm nhận ánh sáng' }),
+    G('Optic nerve', [1.0, 0.9, 0.3], [0, 0, -160], 0.2, nerve, { info: '1,2 triệu sợi dẫn hình ảnh về não' }),
+    G('Eye muscles', [1.0, 0.3, 0.3], [-150, 150, -150], 0.1, muscles, { info: 'sáu cơ điều khiển hướng nhìn của mắt' }),
   ];
 }
 
@@ -129,15 +129,15 @@ function ear() {
   const canals = [torus([95, 74, -10], 26, 3.5, [1, 0, 0], 2.2), torus([80, 62, 8], 26, 3.5, [0, 1, 0], 2.2), torus([110, 62, 6], 26, 3.5, [0, 0, 1], 2.2), ellipsoid([88, 25, 0], [22, 20, 16], 0.9)];
   const nerve = [vessel([[118, -10, 0], [170, 15, -5], [260, 30, -15]], 9, 8, 1.3)];
   return [
-    G('Outer ear (pinna)', [1.0, 0.72, 0.6], [-150, 0, 0], 0, pinna, { info: 'funnels sound into the ear canal' }),
-    G('Ear canal', [1.0, 0.6, 0.5], [-80, -40, 0], 0.05, canal, { info: '2.5 cm tube that guides sound in' }),
-    G('Eardrum', [1.0, 0.45, 0.6], [-20, 70, 0], 0.1, drum, { info: 'thin membrane that vibrates with sound' }),
-    G('Ossicles (hammer, anvil, stirrup)', [1.0, 0.95, 0.7], [10, 130, 60], 0.2, ossicles, { info: 'tiniest bones: amplify vibration ~20x' }),
-    G('Middle ear', [0.6, 0.7, 1.0], [0, -90, 0], 0.15, middle, { info: 'air-filled chamber behind the eardrum' }),
-    G('Eustachian tube', [0.8, 0.6, 1.0], [0, -130, 70], 0.2, eust, { info: 'equalises pressure: the pop when you fly' }),
-    G('Cochlea', [0.6, 1.0, 0.4], [90, -70, 0], 0.2, cochlea, { info: '15,000 hair cells turn sound into signals' }),
-    G('Semicircular canals', [0.3, 0.9, 1.0], [90, 120, 0], 0.2, canals, { info: 'balance: sense how your head turns' }),
-    G('Auditory nerve', [1.0, 0.85, 0.3], [150, 0, 0], 0.25, nerve, { info: 'sends sound and balance to the brain' }),
+    G('Outer ear (pinna)', [1.0, 0.72, 0.6], [-150, 0, 0], 0, pinna, { info: 'thu âm thanh vào ống tai' }),
+    G('Ear canal', [1.0, 0.6, 0.5], [-80, -40, 0], 0.05, canal, { info: 'ống dài 2,5 cm dẫn âm thanh vào' }),
+    G('Eardrum', [1.0, 0.45, 0.6], [-20, 70, 0], 0.1, drum, { info: 'màng mỏng rung theo âm thanh' }),
+    G('Ossicles (hammer, anvil, stirrup)', [1.0, 0.95, 0.7], [10, 130, 60], 0.2, ossicles, { info: 'những xương nhỏ nhất: khuếch đại rung động ~20 lần' }),
+    G('Middle ear', [0.6, 0.7, 1.0], [0, -90, 0], 0.15, middle, { info: 'khoang chứa khí sau màng nhĩ' }),
+    G('Eustachian tube', [0.8, 0.6, 1.0], [0, -130, 70], 0.2, eust, { info: 'cân bằng áp suất: tiếng "ù" khi đi máy bay' }),
+    G('Cochlea', [0.6, 1.0, 0.4], [90, -70, 0], 0.2, cochlea, { info: '15.000 tế bào lông biến âm thanh thành tín hiệu' }),
+    G('Semicircular canals', [0.3, 0.9, 1.0], [90, 120, 0], 0.2, canals, { info: 'thăng bằng: cảm nhận đầu bạn xoay thế nào' }),
+    G('Auditory nerve', [1.0, 0.85, 0.3], [150, 0, 0], 0.25, nerve, { info: 'gửi âm thanh và thăng bằng lên não' }),
   ];
 }
 
@@ -161,13 +161,13 @@ function tooth() {
   const bone = [boxSurface([0, -92, 0], [155, 166, 115], 0.22, (x, y, z) => !(y > -10 && Math.hypot(x, z) < 60)), boxEdges([0, -92, 0], [155, 166, 115], 0, 1.5),
     dots(marrow.filter(([x, , z]) => Math.min(Math.hypot(x - 28, z), Math.hypot(x + 28, z)) > 30), 2, 0.8)];
   return [
-    G('Enamel', [0.9, 0.95, 1.0], [0, 150, 0], 0, enamel, { info: 'hardest substance in the body' }),
-    G('Gum (gingiva)', [1.0, 0.5, 0.6], [0, 40, 140], 0, gum, { info: 'seals the tooth against germs' }),
-    G('Jaw bone', [1.0, 0.9, 0.7], [0, -60, -180], 0, bone, { info: 'holds the roots in their sockets' }),
-    G('Dentin', [1.0, 0.82, 0.45], [0, 75, 0], 0.15, dentin, { info: 'yellow layer that carries sensation' }),
-    G('Cementum & roots', [0.85, 0.7, 0.5], [0, -80, 0], 0.15, roots, { info: 'bone-like coat that anchors the roots' }),
-    G('Pulp', [1.0, 0.35, 0.4], [0, 30, 120], 0.3, pulp, { info: 'living core: why a deep cavity hurts' }),
-    G('Nerves & blood vessels', [1.0, 0.9, 0.3], [0, -30, 180], 0.35, nerves, { info: 'feed the tooth through the root tips' }),
+    G('Enamel', [0.9, 0.95, 1.0], [0, 150, 0], 0, enamel, { info: 'chất cứng nhất trong cơ thể' }),
+    G('Gum (gingiva)', [1.0, 0.5, 0.6], [0, 40, 140], 0, gum, { info: 'bịt kín răng khỏi vi khuẩn' }),
+    G('Jaw bone', [1.0, 0.9, 0.7], [0, -60, -180], 0, bone, { info: 'giữ chân răng trong ổ răng' }),
+    G('Dentin', [1.0, 0.82, 0.45], [0, 75, 0], 0.15, dentin, { info: 'lớp màu vàng dẫn cảm giác' }),
+    G('Cementum & roots', [0.85, 0.7, 0.5], [0, -80, 0], 0.15, roots, { info: 'lớp giống xương giúp neo chân răng' }),
+    G('Pulp', [1.0, 0.35, 0.4], [0, 30, 120], 0.3, pulp, { info: 'lõi sống: vì sao sâu răng sâu thì đau' }),
+    G('Nerves & blood vessels', [1.0, 0.9, 0.3], [0, -30, 180], 0.35, nerves, { info: 'nuôi răng qua chóp chân răng' }),
   ];
 }
 
@@ -192,22 +192,22 @@ function skull() {
   const jawPath = [[-6, -12, -66], [-10, -72, -58], [40, -78, -40], [92, -78, 0], [40, -78, 40], [-10, -72, 58], [-6, -12, 66]];
   const mandible = [vessel(jawPath, 9, 9, 1.1), vessel([[-8, -40, -62], [12, -18, -56]], 4, 3, 1.4), vessel([[-8, -40, 62], [12, -18, 56]], 4, 3, 1.4)];
   return [
-    G('Skull cap (calvaria)', [0.95, 0.92, 0.82], [0, 150, 0], 0, calvaria, { info: 'fused plates that protect the brain' }),
-    G('Frontal bone', [1.0, 0.85, 0.6], [120, 60, 0], 0.05, frontal, { info: 'forehead and roof of the eye sockets' }),
-    G('Occipital bone', [0.8, 0.85, 1.0], [-150, 20, 0], 0.05, occipital, { info: 'back of the skull: the spinal cord exits here' }),
-    G('Cranial base & temporal bones', [0.75, 0.8, 0.95], [0, -10, 0], 0, base, { info: 'floor under the brain; houses the ears' }),
-    G('Eye sockets (orbits)', [0.5, 0.9, 1.0], [80, 20, 0], 0.15, orbits, { info: 'bony cones that protect the eyes' }),
-    G('Maxilla & cheekbones', [1.0, 0.7, 0.5], [100, -50, 0], 0.1, maxilla, { info: 'upper jaw, nose and cheeks' }),
-    G('Teeth', [1.0, 1.0, 1.0], [130, -80, 0], 0.25, upper, { info: '32 in adults: cut, tear and grind' }),
+    G('Skull cap (calvaria)', [0.95, 0.92, 0.82], [0, 150, 0], 0, calvaria, { info: 'các tấm xương liền nhau bảo vệ não' }),
+    G('Frontal bone', [1.0, 0.85, 0.6], [120, 60, 0], 0.05, frontal, { info: 'trán và phần mái của hốc mắt' }),
+    G('Occipital bone', [0.8, 0.85, 1.0], [-150, 20, 0], 0.05, occipital, { info: 'phía sau hộp sọ: tủy sống đi ra từ đây' }),
+    G('Cranial base & temporal bones', [0.75, 0.8, 0.95], [0, -10, 0], 0, base, { info: 'nền dưới não; chứa phần tai' }),
+    G('Eye sockets (orbits)', [0.5, 0.9, 1.0], [80, 20, 0], 0.15, orbits, { info: 'hốc xương hình nón bảo vệ mắt' }),
+    G('Maxilla & cheekbones', [1.0, 0.7, 0.5], [100, -50, 0], 0.1, maxilla, { info: 'hàm trên, mũi và má' }),
+    G('Teeth', [1.0, 1.0, 1.0], [130, -80, 0], 0.25, upper, { info: '32 chiếc ở người lớn: cắt, xé và nghiền' }),
     G('Teeth (lower)', [1.0, 1.0, 1.0], [110, -140, 0], 0.25, lower, { showLabel: false }),
-    G('Mandible (jaw)', [1.0, 0.8, 0.45], [60, -180, 0], 0.1, mandible, { info: 'the only movable skull bone: chew & talk' }),
+    G('Mandible (jaw)', [1.0, 0.8, 0.45], [60, -180, 0], 0.1, mandible, { info: 'xương sọ duy nhất cử động được: nhai & nói' }),
   ];
 }
 
 export const ANATOMY2 = [
-  { name: 'Lungs', groups: lungs, color: [0.55, 0.75, 1.0], tilt: 8, viewYaw: 0.5, breath: { period: 4.5, amp: 0.06 }, fact: '~480 million alveoli · 70 m² of gas-exchange surface' },
-  { name: 'Human Eye', groups: eye, color: [0.55, 0.9, 1.0], tilt: 10, viewYaw: 0.9, fact: '24 mm · 120 million rods · 6 million cones' },
-  { name: 'Human Ear', groups: ear, color: [1.0, 0.75, 0.55], tilt: 5, viewYaw: 0.35, fact: 'hears 20-20,000 Hz · smallest bones in the body' },
-  { name: 'Tooth (Molar)', groups: tooth, color: [0.92, 0.95, 1.0], tilt: 15, viewYaw: 0.6, fact: 'enamel, dentin, pulp · anchored by 2 roots' },
-  { name: 'Skull', groups: skull, color: [0.95, 0.9, 0.8], tilt: 8, viewYaw: 0.7, fact: '22 bones · only the jaw moves' },
+  { name: 'Lungs', groups: lungs, color: [0.55, 0.75, 1.0], tilt: 8, viewYaw: 0.5, breath: { period: 4.5, amp: 0.06 }, fact: '~480 triệu phế nang · 70 m² bề mặt trao đổi khí' },
+  { name: 'Human Eye', groups: eye, color: [0.55, 0.9, 1.0], tilt: 10, viewYaw: 0.9, fact: '24 mm · 120 triệu tế bào que · 6 triệu tế bào nón' },
+  { name: 'Human Ear', groups: ear, color: [1.0, 0.75, 0.55], tilt: 5, viewYaw: 0.35, fact: 'nghe 20–20.000 Hz · có những xương nhỏ nhất cơ thể' },
+  { name: 'Tooth (Molar)', groups: tooth, color: [0.92, 0.95, 1.0], tilt: 15, viewYaw: 0.6, fact: 'men, ngà, tủy · bám bằng 2 chân răng' },
+  { name: 'Skull', groups: skull, color: [0.95, 0.9, 0.8], tilt: 8, viewYaw: 0.7, fact: '22 xương · chỉ có hàm cử động' },
 ];

@@ -95,7 +95,7 @@ test('16 point at a part to learn it, pinch to pull it out, click works too', as
   expect(s.explode).toBeGreaterThan(0.9);                                          // pointing does not collapse the view
   await expect(page.locator('#partCard')).toBeVisible();
   await expect(page.locator('#partCard .pname')).toHaveText('Hippocampus');
-  await expect(page.locator('#partCard .pinfo')).toContainText('memory');
+  await expect(page.locator('#partCard .pinfo')).toContainText('trí nhớ');
   await shot(page, '16a-point-selects-hippocampus');
   await play(page, 0.35, { pose: 'pinch' });                                       // pinch = pull it out toward you
   await play(page, 0.8, { pose: 'pinch' });
@@ -131,12 +131,12 @@ test('17 quiz: find the named part by pointing, with score', async ({ page }) =>
   let s = await status(page);
   expect(s.quiz.phase).toBe('ask');
   expect(s.explode).toBeGreaterThan(0.9);                                          // the quiz explodes the model
-  await expect(page.locator('#quiz .q')).toContainText(`Find: ${s.quiz.target}`);
+  await expect(page.locator('#quiz .q')).toContainText(`Tìm: ${s.quiz.target}`);
   await shot(page, '17a-quiz-question');
   await pointAtPart(page, s.quiz.target);                                          // right answer
   s = await status(page);
   expect(s.quiz.score).toBe(1);
-  expect(s.quiz.feedback).toContain('Correct');
+  expect(s.quiz.feedback).toContain('Chính xác');
   await shot(page, '17b-quiz-correct');
   await play(page, 2.0, null);                                                     // next question appears
   s = await status(page);
@@ -156,7 +156,7 @@ test('17 quiz: find the named part by pointing, with score', async ({ page }) =>
   expect(s.quiz.done).toBe(true);
   expect(s.quiz.score).toBe(4);
   expect(s.explode).toBeGreaterThan(0.9);                                          // regression: pointing never collapses the view
-  await expect(page.locator('#quiz .qf')).toContainText('Score 4 / 5');
+  await expect(page.locator('#quiz .qf')).toContainText('Điểm 4 / 5');
   await shot(page, '17d-quiz-finished-score');
   noErrors();
 });
@@ -184,7 +184,7 @@ test('18 voice commands drive the app and parts are read aloud', async ({ page }
   expect(await page.evaluate(() => window.__spoken.some((t) => t.includes('Right atrium')))).toBe(true);
   await shot(page, '18a-voice-selects-right-atrium');
   expect(await page.evaluate(() => window.wonderSnap.voice('what does it do'))).toEqual(['describe']);
-  expect(await page.evaluate(() => window.__spoken.at(-1))).toContain('receives blood from the body');
+  expect(await page.evaluate(() => window.__spoken.at(-1))).toContain('nhận máu từ cơ thể');
   expect(await page.evaluate(() => window.wonderSnap.voice('zoom in'))).toEqual(['zoom in']);
   expect(await page.evaluate(() => window.wonderSnap.voice('put it back together'))).toContain('assemble');
   expect(await page.evaluate(() => window.wonderSnap.voice('next one'))).toEqual(['next']);
@@ -194,7 +194,7 @@ test('18 voice commands drive the app and parts are read aloud', async ({ page }
   await play(page, 0.2, null);
   expect((await status(page)).activeCat).toBe('Vehicles');                         // the catalog tab follows
   expect(await page.evaluate(() => window.wonderSnap.voice('blah blah'))).toEqual([]);
-  await expect(page.locator('#toast')).toContainText('not understood');
+  await expect(page.locator('#toast')).toContainText('không hiểu');
   noErrors();
 });
 
@@ -252,17 +252,17 @@ test('21 category tabs show each collection; the catalog has 33 models', async (
   const noErrors = watchErrors(page);
   await openApp(page);
   const tabs = await page.locator('.tab').allTextContents();
-  expect(tabs.map((t) => t.split(' ·')[0])).toEqual(['Wonders', 'Anatomy', 'Biology', 'Engines', 'Vehicles', 'Machines']);
+  expect(tabs.map((t) => t.split(' ·')[0])).toEqual(['Kỳ quan', 'Giải phẫu', 'Sinh học', 'Động cơ', 'Phương tiện', 'Máy móc']);
   let total = 0;
-  for (const t of ['Wonders', 'Anatomy', 'Biology', 'Engines', 'Vehicles', 'Machines']) {
+  for (const t of ['Kỳ quan', 'Giải phẫu', 'Sinh học', 'Động cơ', 'Phương tiện', 'Máy móc']) {
     await page.locator('.tab', { hasText: t }).click();
     const n = await page.locator('.chip:visible').count();
     expect(n).toBeGreaterThan(0);
     total += n;
-    if (t === 'Anatomy') await shot(page, '21a-anatomy-tab');
+    if (t === 'Giải phẫu') await shot(page, '21a-anatomy-tab');
   }
   expect(total).toBe(33);
-  await page.locator('.tab', { hasText: 'Machines' }).click();
+  await page.locator('.tab', { hasText: 'Máy móc' }).click();
   await page.getByRole('button', { name: 'Mechanical Watch' }).click();
   await play(page, 3.2, null);
   expect((await status(page)).name).toBe('Mechanical Watch');

@@ -27,11 +27,11 @@ function dna() {
   }
   const COL = { A: [1.0, 0.35, 0.35], T: [0.4, 1.0, 0.45], G: [0.35, 0.6, 1.0], C: [1.0, 0.85, 0.3] };
   const NAME = { A: 'Adenine (A)', T: 'Thymine (T)', G: 'Guanine (G)', C: 'Cytosine (C)' };
-  const INFO = { A: 'always pairs with thymine (2 bonds)', T: 'always pairs with adenine', G: 'pairs with cytosine (3 bonds)', C: 'always pairs with guanine' };
+  const INFO = { A: 'luôn bắt cặp với thymine (2 liên kết)', T: 'luôn bắt cặp với adenine', G: 'bắt cặp với cytosine (3 liên kết)', C: 'luôn bắt cặp với guanine' };
   const out = [
-    G('Backbone (sugar-phosphate)', [0.8, 0.85, 1.0], [-190, 0, 0], 0, back1, { info: 'the two rails of the twisted ladder' }),
+    G('Backbone (sugar-phosphate)', [0.8, 0.85, 1.0], [-190, 0, 0], 0, back1, { info: 'hai thanh ray của chiếc thang xoắn' }),
     G('Backbone (L)', [0.8, 0.85, 1.0], [190, 0, 0], 0, back2, { showLabel: false }),
-    G('Hydrogen bonds', [1.0, 1.0, 1.0], [0, 0, 60], 0.15, hbonds, { info: 'weak links: DNA unzips here to copy itself' }),
+    G('Hydrogen bonds', [1.0, 1.0, 1.0], [0, 0, 60], 0.15, hbonds, { info: 'liên kết yếu: DNA tách đôi ở đây để tự sao chép' }),
   ];
   for (const b of 'ATGC') {
     if (bases[1][b].length) out.push(G(NAME[b], COL[b], [-150, 0, 0], 0.05, bases[1][b], { info: INFO[b] }));
@@ -87,22 +87,22 @@ function cell() {
   const free = [];
   for (let i = 0; i < 180; i++) { const d = norm([rng.normal(), rng.normal(), rng.normal()]), r = 90 + rng.random() * 90; free.push([d[0] * r, d[1] * r * 0.85, d[2] * r * 0.9]); }
   return [
-    G('Cell membrane', [0.5, 0.85, 1.0], [0, 0, 270], 0, mem(true), { info: 'gatekeeper: controls what gets in and out' }),
+    G('Cell membrane', [0.5, 0.85, 1.0], [0, 0, 270], 0, mem(true), { info: 'người gác cổng: kiểm soát cái gì vào và ra' }),
     G('Cell membrane (back)', [0.5, 0.85, 1.0], [0, 0, -270], 0, mem(false), { showLabel: false }),
-    G('Nucleus', [0.75, 0.5, 1.0], [-90, 60, 0], 0.1, nucleus, { info: 'holds the DNA: the control centre' }),
-    G('Nucleolus', [1.0, 0.4, 0.8], [-60, 170, 60], 0.3, nucleolus, { info: 'builds the ribosomes' }),
-    G('Mitochondria', [1.0, 0.55, 0.25], [160, -20, 70], 0.15, mito, { info: 'power plants: turn food into ATP energy' }),
-    G('Rough ER', [0.4, 0.9, 1.0], [-40, -150, 0], 0.15, rough, { info: 'ribosome-studded folds that make proteins' }),
-    G('Smooth ER', [0.4, 1.0, 0.7], [-190, -60, 0], 0.2, smooth, { info: 'makes fats, clears toxins' }),
-    G('Golgi apparatus', [1.0, 0.85, 0.35], [190, -120, 40], 0.2, golgi, { info: 'packs and ships proteins' }),
-    G('Lysosomes', [1.0, 0.35, 0.35], [60, 170, 0], 0.25, lyso, { info: 'recycling bins full of enzymes' }),
-    G('Centrioles', [0.9, 1.0, 0.5], [110, 170, -60], 0.3, centrioles, { info: 'organise the split when a cell divides' }),
-    G('Cytoskeleton', [0.8, 0.8, 1.0], [0, 0, -80], 0.25, skel, { info: 'scaffolding and transport rails' }),
-    G('Free ribosomes', [0.95, 0.95, 0.95], [0, -40, 140], 0.3, [dots(free, 2, 1.2)], { info: 'read RNA and build proteins' }),
+    G('Nucleus', [0.75, 0.5, 1.0], [-90, 60, 0], 0.1, nucleus, { info: 'chứa DNA: trung tâm điều khiển' }),
+    G('Nucleolus', [1.0, 0.4, 0.8], [-60, 170, 60], 0.3, nucleolus, { info: 'tạo ra các ribosome' }),
+    G('Mitochondria', [1.0, 0.55, 0.25], [160, -20, 70], 0.15, mito, { info: 'nhà máy điện: biến thức ăn thành năng lượng ATP' }),
+    G('Rough ER', [0.4, 0.9, 1.0], [-40, -150, 0], 0.15, rough, { info: 'các nếp gấp đầy ribosome tạo ra protein' }),
+    G('Smooth ER', [0.4, 1.0, 0.7], [-190, -60, 0], 0.2, smooth, { info: 'tạo chất béo, loại bỏ độc tố' }),
+    G('Golgi apparatus', [1.0, 0.85, 0.35], [190, -120, 40], 0.2, golgi, { info: 'đóng gói và vận chuyển protein' }),
+    G('Lysosomes', [1.0, 0.35, 0.35], [60, 170, 0], 0.25, lyso, { info: 'thùng tái chế đầy enzyme' }),
+    G('Centrioles', [0.9, 1.0, 0.5], [110, 170, -60], 0.3, centrioles, { info: 'tổ chức việc phân chia khi tế bào phân bào' }),
+    G('Cytoskeleton', [0.8, 0.8, 1.0], [0, 0, -80], 0.25, skel, { info: 'giàn khung và đường ray vận chuyển' }),
+    G('Free ribosomes', [0.95, 0.95, 0.95], [0, -40, 140], 0.3, [dots(free, 2, 1.2)], { info: 'đọc RNA và tạo ra protein' }),
   ];
 }
 
 export const BIOLOGY = [
-  { name: 'DNA Double Helix', groups: dna, color: [0.55, 0.75, 1.0], tilt: 0, viewYaw: 0.0, fact: '3 billion base pairs · 2 m per cell · A-T, G-C' },
-  { name: 'Animal Cell', groups: cell, color: [0.5, 0.9, 1.0], tilt: 12, viewYaw: 0.5, fact: '~20 µm · the body has ~37 trillion of them' },
+  { name: 'DNA Double Helix', groups: dna, color: [0.55, 0.75, 1.0], tilt: 0, viewYaw: 0.0, fact: '3 tỷ cặp base · 2 m mỗi tế bào · A-T, G-C' },
+  { name: 'Animal Cell', groups: cell, color: [0.5, 0.9, 1.0], tilt: 12, viewYaw: 0.5, fact: '~20 µm · cơ thể có ~37 nghìn tỷ tế bào' },
 ];

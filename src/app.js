@@ -32,10 +32,12 @@ const CFG = {
 
 const HAND_EDGES = [[0, 1], [1, 2], [2, 3], [3, 4], [0, 5], [5, 6], [6, 7], [7, 8], [5, 9], [9, 10], [10, 11], [11, 12],
   [9, 13], [13, 14], [14, 15], [15, 16], [13, 17], [17, 18], [18, 19], [19, 20], [0, 17]];
-const POSE_UI = { [OPEN]: ['✋', 'Open hand'], [FIST]: ['✊', 'Fist'], [PEACE]: ['✌', 'Peace'], [POINT]: ['☝', 'Pointing'], other: ['🤚', 'Moving'], [NONE]: ['·', 'No hand'] };
+const POSE_UI = { [OPEN]: ['✋', 'Mở tay'], [FIST]: ['✊', 'Nắm tay'], [PEACE]: ['✌', 'Chữ V'], [POINT]: ['☝', 'Chỉ tay'], other: ['🤚', 'Đang di chuyển'], [NONE]: ['·', 'Không thấy tay'] };
 const POSE_COLOR = { [OPEN]: '#66e0ff', [FIST]: '#ffd166', [PEACE]: '#ff6bd6', [POINT]: '#7dff9b', other: '#e8f1ff', [NONE]: '#e8f1ff' };
 const rgbCss = (c, a = 1) => `rgba(${Math.round(c[0] * 255)}, ${Math.round(c[1] * 255)}, ${Math.round(c[2] * 255)}, ${a})`;
 const CATEGORIES = [...new Set(CATALOG.map((d) => d.category))];
+const CAT_VI = { Wonders: 'Kỳ quan', Anatomy: 'Giải phẫu', Biology: 'Sinh học', Engines: 'Động cơ', Vehicles: 'Phương tiện', Machines: 'Máy móc' };
+const STATE_VI = { idle: 'chờ', sphere: 'hình cầu', formed: 'đã dựng', dissolve: 'đang tan' };
 
 // ---------------------------------------------------------------- model cache (built in a worker)
 class ModelStore {
@@ -337,7 +339,7 @@ class App {
     } else this.hover = { li: -1, t0: t };
     if (ctl.pinchStart) {
       ctl.pinchStart = false;
-      if (this.sel >= 0) { this.pulled = !this.pulled; this.toast(this.pulled ? `🤏 Pulled out: ${this.model.labels[this.sel].label}` : '🤏 Put back'); }
+      if (this.sel >= 0) { this.pulled = !this.pulled; this.toast(this.pulled ? `🤏 Đã kéo ra: ${this.model.labels[this.sel].label}` : '🤏 Đã đặt lại'); }
     }
   }
   selectPart(li, source = 'click') {
@@ -358,7 +360,7 @@ class App {
     else if (st.state !== FORMED) this.selectModel(st.index);
     this.quiz = { pending: true, total: QUIZ_LEN, asked: 0, score: 0, target: -1, phase: 'wait', nextAt: 0, done: false, feedback: '', seed: this.frames };
     this.manualExplode = 1;
-    this.toast('🎓 Quiz: point at the part I name');
+    this.toast('🎓 Đố vui: chỉ vào bộ phận tôi đọc tên');
   }
   stopQuiz() { this.quiz = null; this.deselect(); }
   updateQuiz(t, ready) {
@@ -379,21 +381,21 @@ class App {
     this.deselect();
     if (q.asked >= q.total) {
       q.done = true; q.phase = 'done'; q.nextAt = this.t;
-      q.feedback = `🏆 Score ${q.score} / ${q.total}`;
-      this.say(`Quiz finished. You scored ${q.score} out of ${q.total}.`);
+      q.feedback = `🏆 Điểm ${q.score} / ${q.total}`;
+      this.say(`Hết đố vui. Bạn được ${q.score} trên ${q.total} điểm.`);
       return;
     }
     q.target = q.order[q.asked % q.order.length]; q.asked++; q.phase = 'ask'; q.feedback = '';
-    this.say(`Find the ${this.model.labels[q.target].label}`);
+    this.say(`Hãy tìm ${this.model.labels[q.target].label}`);
   }
   answerQuiz(li) {
     const q = this.quiz, L = this.model.labels;
     const ok = li === q.target;
     if (ok) q.score++;
     q.phase = 'feedback'; q.nextAt = this.t + 1.8;
-    q.feedback = ok ? `✅ Correct! ${L[li].label}: ${L[li].info}` : `❌ That's the ${L[li].label}. Here is the ${L[q.target].label}.`;
+    q.feedback = ok ? `✅ Chính xác! ${L[li].label}: ${L[li].info}` : `❌ Đó là ${L[li].label}. ${L[q.target].label} ở đây.`;
     this.sel = q.target;                                                // reveal the right answer
-    this.say(ok ? `Correct! ${L[li].info}` : `No, that's the ${L[li].label}.`);
+    this.say(ok ? `Chính xác! ${L[li].info}` : `Không, đó là ${L[li].label}.`);
   }
 
   // ------------------------------------------------------------ voice
@@ -422,24 +424,24 @@ class App {
         this.say(L ? `${L.label}. ${L.info}.` : `${CATALOG[st.index].name}. ${CATALOG[st.index].fact || ''}`); done.push('describe');
       }
     }
-    this.toast(`🎤 “${text}”${done.length ? ' → ' + done.join(', ') : ' (not understood)'}`);
+    this.toast(`🎤 “${text}”${done.length ? ' → ' + done.join(', ') : ' (không hiểu)'}`);
     return done;
   }
   toggleVoice() {
-    if (this.voiceOn) { this.voice.stop(); this.voiceOn = false; this.toast('🎤 Voice off'); }
+    if (this.voiceOn) { this.voice.stop(); this.voiceOn = false; this.toast('🎤 Đã tắt giọng nói'); }
     else {
       this.voiceOn = true;
       const ok = this.voice.start();
-      this.toast(ok ? '🎤 Listening: say “show me the heart”, “explode”, “next”, “quiz”…' : '🎤 Speech recognition is not available here: parts are still read aloud');
+      this.toast(ok ? '🎤 Đang nghe (nói tiếng Anh): “show me the heart”, “explode”, “next”, “quiz”…' : '🎤 Trình duyệt này không nhận diện được giọng nói: các bộ phận vẫn được đọc to');
     }
     this.$('bVoice').classList.toggle('on', this.voiceOn);
   }
 
   // ------------------------------------------------------------ cut-away + recording
-  toggleCut() { this.cut.on = !this.cut.on; this.$('bCut').classList.toggle('on', this.cut.on); this.toast(this.cut.on ? '✂ Cut-away: move your hand (or the mouse) left / right' : '✂ Cut-away off'); }
+  toggleCut() { this.cut.on = !this.cut.on; this.$('bCut').classList.toggle('on', this.cut.on); this.toast(this.cut.on ? '✂ Mặt cắt: di chuyển tay (hoặc chuột) sang trái / phải' : '✂ Đã tắt mặt cắt'); }
   async toggleRecord() {
-    if (!Recorder.supported()) { this.toast('Recording is not supported in this browser'); return; }
-    if (!this.recorder.on) { this.recorder.start(); this.$('bRec').classList.add('on'); this.toast('⏺ Recording…'); return; }
+    if (!Recorder.supported()) { this.toast('Trình duyệt này không hỗ trợ quay video'); return; }
+    if (!this.recorder.on) { this.recorder.start(); this.$('bRec').classList.add('on'); this.toast('⏺ Đang quay…'); return; }
     const blob = await this.recorder.stop();
     this.$('bRec').classList.remove('on');
     if (!blob) return;
@@ -449,7 +451,7 @@ class App {
     a.download = `wondersnap-${new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19)}.webm`;
     document.body.appendChild(a); a.click(); a.remove();
     setTimeout(() => URL.revokeObjectURL(a.href), 10000);
-    this.toast(`💾 Saved ${(blob.size / 1e6).toFixed(1)} MB video`);
+    this.toast(`💾 Đã lưu video ${(blob.size / 1e6).toFixed(1)} MB`);
   }
 
   // ------------------------------------------------------------ overlay: hands, pointer, labels
@@ -561,7 +563,7 @@ class App {
     this.tabs = {}; this.chips = [];
     for (const c of CATEGORIES) {
       const b = document.createElement('button');
-      b.className = 'tab'; b.textContent = `${c} · ${CATALOG.filter((d) => d.category === c).length}`; b.dataset.cat = c;
+      b.className = 'tab'; b.textContent = `${CAT_VI[c] || c} · ${CATALOG.filter((d) => d.category === c).length}`; b.dataset.cat = c;
       b.addEventListener('click', () => this.showCategory(c));
       tabs.appendChild(b); this.tabs[c] = b;
     }
@@ -582,13 +584,13 @@ class App {
 
   guideItems(machine) {
     return [
-      ['snap', '🫰', '<b>Snap</b> — summon particles / dissolve'],
-      ['fist', '✊', machine ? '<b>Fist</b> — put it together' : '<b>Fist</b> — form the wonder'],
-      ['open', '✋', machine ? '<b>Open slowly</b> — explode it, see inside' : '<b>Open hand</b> — morph to the next wonder'],
-      ['twist', '🔄', '<b>Twist / raise hand</b> — rotate & tilt it'],
-      ...(machine ? [['point', '☝', '<b>Point</b> at a part to learn it · <b>pinch</b> 🤏 pulls it out']] : []),
-      ['zoom', '🙌', '<b>Two hands</b> apart / together — zoom'],
-      ['peace', '✌', '<b>Peace</b> — jump to the next model'],
+      ['snap', '🫰', '<b>Búng tay</b> — gọi hạt ra / làm tan'],
+      ['fist', '✊', machine ? '<b>Nắm tay</b> — ghép lại' : '<b>Nắm tay</b> — dựng kỳ quan'],
+      ['open', '✋', machine ? '<b>Mở tay từ từ</b> — nổ tung, nhìn bên trong' : '<b>Mở tay</b> — chuyển sang kỳ quan kế tiếp'],
+      ['twist', '🔄', '<b>Xoay / nâng tay</b> — xoay và nghiêng mô hình'],
+      ...(machine ? [['point', '☝', '<b>Chỉ tay</b> vào một bộ phận để tìm hiểu · <b>chụm ngón</b> 🤏 để kéo ra']] : []),
+      ['zoom', '🙌', '<b>Hai tay</b> dang ra / thu lại — phóng to / thu nhỏ'],
+      ['peace', '✌', '<b>Chữ V</b> — sang mô hình kế tiếp'],
     ];
   }
 
@@ -603,7 +605,7 @@ class App {
     const isM = isMachine(st.index);
     if (this.lastIndexShown !== st.index) {
       this.lastIndexShown = st.index;
-      $('cat').textContent = def.category; $('name').textContent = def.name; $('fact').textContent = def.fact || '';
+      $('cat').textContent = CAT_VI[def.category] || def.category; $('name').textContent = def.name; $('fact').textContent = def.fact || '';
       $('bigTitle').querySelector('.t').textContent = def.name; $('bigTitle').querySelector('.s').textContent = def.fact || '';
       $('explodeBox').hidden = !isM;
       this.chips.forEach((c, i) => c.classList.toggle('active', i === st.index));
@@ -611,9 +613,9 @@ class App {
       this.guideKey = null;
     }
     const pill = $('statePill');
-    if (pill.dataset.state !== st.state) { pill.dataset.state = st.state; pill.textContent = st.state; }
+    if (pill.dataset.state !== st.state) { pill.dataset.state = st.state; pill.textContent = STATE_VI[st.state] || st.state; }
     const vis = ctl.handVisible(t), pose = vis ? (ctl.pinch ? 'pinch' : ctl.pose) : NONE;
-    const [emo, label] = pose === 'pinch' ? ['🤏', 'Pinch'] : POSE_UI[pose] || POSE_UI.other;
+    const [emo, label] = pose === 'pinch' ? ['🤏', 'Chụm ngón'] : POSE_UI[pose] || POSE_UI.other;
     const pt = `${emo} ${label}${ctl.secondVisible(t) ? ' + 🖐' : ''}`;
     if ($('posePill').textContent !== pt) $('posePill').textContent = pt;
     const op = vis ? ctl.openness : 0;
@@ -635,7 +637,7 @@ class App {
       card.querySelector('.swatch').style.background = rgbCss(L.color);
       card.querySelector('.pname').textContent = L.label;
       card.querySelector('.pinfo').textContent = L.info;
-      card.querySelector('.pmodel').textContent = `${def.name} · part ${this.sel + 1} of ${this.model.labels.length}`;
+      card.querySelector('.pmodel').textContent = `${def.name} · bộ phận ${this.sel + 1} / ${this.model.labels.length}`;
     }
     card.classList.toggle('pulled', this.pulled);
     // quiz banner
@@ -643,22 +645,22 @@ class App {
     qb.hidden = !q;
     if (q) {
       const target = q.target >= 0 && this.model?.labels[q.target];
-      qb.querySelector('.q').textContent = q.done ? '🎓 Quiz finished' : target ? `🎓 Find: ${target.label}` : '🎓 Get ready…';
-      qb.querySelector('.qs').textContent = `question ${Math.max(q.asked, 1)} / ${q.total} · score ${q.score}`;
-      qb.querySelector('.qf').textContent = q.feedback || 'point at it with one finger (or click it)';
+      qb.querySelector('.q').textContent = q.done ? '🎓 Đã xong đố vui' : target ? `🎓 Tìm: ${target.label}` : '🎓 Chuẩn bị…';
+      qb.querySelector('.qs').textContent = `câu ${Math.max(q.asked, 1)} / ${q.total} · điểm ${q.score}`;
+      qb.querySelector('.qf').textContent = q.feedback || 'chỉ bằng một ngón tay (hoặc nhấp chuột)';
       qb.classList.toggle('good', q.feedback.startsWith('✅') || q.done);
       qb.classList.toggle('bad', q.feedback.startsWith('❌'));
     }
-    const cam = this.cam?.running ? `cam <b>${this.cam.fps.toFixed(0)}</b> fps · hands ${this.cam.delegate} ${this.cam.detectMs.toFixed(0)} ms` : 'camera off';
-    const extra = [Math.abs(this.zoom - 1) > 0.02 ? `zoom <b>${this.zoom.toFixed(2)}×</b>` : '', this.recorder.on ? `<span class="rec">● REC ${this.recorder.seconds().toFixed(0)} s</span>` : '', this.voiceOn ? '🎤 listening' : ''].filter(Boolean).join(' · ');
-    $('stats').innerHTML = `<b>${this.fps.toFixed(0)}</b> fps · <b>${(CFG.n / 1000).toFixed(0)}k</b> particles<br>${cam}${extra ? '<br>' + extra : ''}`;
+    const cam = this.cam?.running ? `camera <b>${this.cam.fps.toFixed(0)}</b> fps · tay ${this.cam.delegate} ${this.cam.detectMs.toFixed(0)} ms` : 'camera tắt';
+    const extra = [Math.abs(this.zoom - 1) > 0.02 ? `thu phóng <b>${this.zoom.toFixed(2)}×</b>` : '', this.recorder.on ? `<span class="rec">● REC ${this.recorder.seconds().toFixed(0)} s</span>` : '', this.voiceOn ? '🎤 đang nghe' : ''].filter(Boolean).join(' · ');
+    $('stats').innerHTML = `<b>${this.fps.toFixed(0)}</b> fps · <b>${(CFG.n / 1000).toFixed(0)}k</b> hạt<br>${cam}${extra ? '<br>' + extra : ''}`;
     for (const e of st.events.splice(0)) {
       const name = CATALOG[st.index].name;
-      if (e === 'snap') this.toast('🫰 Snap! Particles summoned');
-      else if (e === 'form') this.toast(isM ? `✊ Assembling: ${name}` : `✊ Forming ${name}`);
-      else if (e === 'next') this.toast(`✌ Next: ${name}`);
+      if (e === 'snap') this.toast('🫰 Tách! Các hạt đã xuất hiện');
+      else if (e === 'form') this.toast(isM ? `✊ Đang ghép: ${name}` : `✊ Đang dựng ${name}`);
+      else if (e === 'next') this.toast(`✌ Kế tiếp: ${name}`);
       else if (e === 'select') this.toast(`→ ${name}`);
-      else if (e === 'dissolve') this.toast('💥 Dissolved');
+      else if (e === 'dissolve') this.toast('💥 Đã tan');
     }
   }
 
@@ -703,7 +705,7 @@ class App {
       else if (k === 'i') this.voiceCommand('what is this');
       else if (k === 'escape') { if (this.quiz) this.stopQuiz(); this.deselect(); }
       else if (k === 'r') this.toggle('autoRotate', 'bRotate');
-      else if (k === 'g') { this.toggle('handRotate', 'bHandRot'); this.toast(`🔄 Hand rotation ${this.handRotate ? 'on' : 'off'}`); }
+      else if (k === 'g') { this.toggle('handRotate', 'bHandRot'); this.toast(`🔄 Xoay bằng tay: ${this.handRotate ? 'bật' : 'tắt'}`); }
       else if (k === 'l') this.toggle('labelsOn', 'bLabels');
       else if (k === 't') this.trails = !this.trails;
       else if (k === 'c') this.toggleCamera();
@@ -767,21 +769,21 @@ class App {
       this.cam = this.cam || new HandCamera(this.video);
       await this.cam.start((s) => { msg.textContent = s; if (s) this.toast(s); });
       this.camOn = true; this.$('bCam').classList.add('on');
-      this.toast('📷 Camera on — snap your fingers!');
+      this.toast('📷 Đã bật camera — hãy búng tay!');
       return true;
     } catch (e) {
       console.error(e);
-      const text = e.name === 'NotAllowedError' ? 'Camera permission was denied — you can still use the keyboard, mouse and demo.'
-        : e.name === 'NotFoundError' ? 'No camera found — you can still use the keyboard, mouse and demo.' : `Camera error: ${e.message}`;
+      const text = e.name === 'NotAllowedError' ? 'Quyền camera bị từ chối — bạn vẫn dùng được bàn phím, chuột và bản demo.'
+        : e.name === 'NotFoundError' ? 'Không tìm thấy camera — bạn vẫn dùng được bàn phím, chuột và bản demo.' : `Lỗi camera: ${e.message}`;
       msg.textContent = text; this.toast(text);
       this.cam?.stop(); this.cam = null; this.camOn = false;
       return false;
     }
   }
-  stopCamera() { this.cam?.stop(); this.cam = null; this.camOn = false; this.hasVideo = false; this.$('bCam').classList.remove('on'); this.toast('Camera off'); }
+  stopCamera() { this.cam?.stop(); this.cam = null; this.camOn = false; this.hasVideo = false; this.$('bCam').classList.remove('on'); this.toast('Đã tắt camera'); }
   toggleCamera() { if (this.camOn) this.stopCamera(); else this.startCamera(); }
 
-  toggleDemo() { if (this.demo) this.stopDemo(); else { this.demo = new Demo(this); this.$('bDemo').classList.add('on'); this.toast('▶ Demo — synthetic hand'); } }
+  toggleDemo() { if (this.demo) this.stopDemo(); else { this.demo = new Demo(this); this.$('bDemo').classList.add('on'); this.toast('▶ Demo — bàn tay giả lập'); } }
   stopDemo() { if (!this.demo) return; this.demo = null; this.demoHand = undefined; this.$('bDemo').classList.remove('on'); this.ctl.onHands([], this.t); }
 
   // ------------------------------------------------------------ deterministic stepping (tests)
@@ -807,14 +809,14 @@ function boot() {
   try { app = new App(); }
   catch (e) {
     console.error(e);
-    document.getElementById('startMsg').textContent = `Cannot start: ${e.message}`;
+    document.getElementById('startMsg').textContent = `Không khởi động được: ${e.message}`;
     document.getElementById('bStartCam').disabled = true; document.getElementById('bStartNoCam').disabled = true;
     return;
   }
   const start = document.getElementById('start');
   const hideStart = () => { start.hidden = true; };
   document.getElementById('bStartCam').onclick = async () => { if (await app.startCamera()) hideStart(); };
-  document.getElementById('bStartNoCam').onclick = () => { hideStart(); app.toast('Keyboard: Space = snap · F = fist · O = open · E = explode · D = demo · H = help'); };
+  document.getElementById('bStartNoCam').onclick = () => { hideStart(); app.toast('Bàn phím: Space = búng tay · F = nắm · O = mở · E = nổ tung · D = demo · H = trợ giúp'); };
   if (CFG.autostart === 'camera') { hideStart(); app.startCamera(); }
   else if (CFG.autostart === 'nocamera' || CFG.manual) hideStart();
 

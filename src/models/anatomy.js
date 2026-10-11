@@ -93,23 +93,23 @@ function brain() {
     G(name + ' (L)', color, [offR[0], offR[1], -offR[2]], stage, lobes[-1][key], { showLabel: false }),
   ];
   return [
-    ...lobe('Frontal lobe', 'frontal', PINK, [120, 30, 170], 0, 'planning, decisions, personality, movement'),
-    ...lobe('Parietal lobe', 'parietal', BLUE, [-10, 125, 170], 0, 'touch, body position, sense of space'),
-    ...lobe('Temporal lobe', 'temporal', GREEN, [40, -90, 200], 0, 'hearing, language, memory'),
-    ...lobe('Occipital lobe', 'occipital', AMBER, [-150, 30, 150], 0, 'vision - makes sense of what you see'),
-    G('Cerebellum', [1.0, 0.55, 0.2], [-170, -120, 0], 0.05, cb, { info: 'balance, coordination, fine movement' }),
-    G('Brainstem', [1.0, 0.85, 0.35], [-40, -210, 0], 0.1, stem, { info: 'breathing, heartbeat, sleep & wake' }),
-    G('Corpus callosum', [0.95, 0.95, 1.0], [0, 150, 0], 0.25, cc, { info: '200 million fibres linking both halves' }),
-    G('Thalamus', [0.3, 0.9, 1.0], [-20, 55, 0], 0.35, thal, { info: 'relay station for the senses' }),
-    G('Hypothalamus & pituitary', [0.75, 1.0, 0.3], [70, -120, 0], 0.3, hypo, { info: 'hormones, hunger, body temperature' }),
-    G('Hippocampus', [1.0, 0.95, 0.3], [-50, -60, 120], 0.3, R.hippo, { info: 'turns experiences into long-term memory' }),
+    ...lobe('Frontal lobe', 'frontal', PINK, [120, 30, 170], 0, 'lập kế hoạch, ra quyết định, tính cách, vận động'),
+    ...lobe('Parietal lobe', 'parietal', BLUE, [-10, 125, 170], 0, 'xúc giác, vị trí cơ thể, cảm nhận không gian'),
+    ...lobe('Temporal lobe', 'temporal', GREEN, [40, -90, 200], 0, 'thính giác, ngôn ngữ, trí nhớ'),
+    ...lobe('Occipital lobe', 'occipital', AMBER, [-150, 30, 150], 0, 'thị giác - hiểu những gì bạn nhìn thấy'),
+    G('Cerebellum', [1.0, 0.55, 0.2], [-170, -120, 0], 0.05, cb, { info: 'thăng bằng, phối hợp, cử động tinh' }),
+    G('Brainstem', [1.0, 0.85, 0.35], [-40, -210, 0], 0.1, stem, { info: 'hô hấp, nhịp tim, ngủ & thức' }),
+    G('Corpus callosum', [0.95, 0.95, 1.0], [0, 150, 0], 0.25, cc, { info: '200 triệu sợi nối hai bán cầu' }),
+    G('Thalamus', [0.3, 0.9, 1.0], [-20, 55, 0], 0.35, thal, { info: 'trạm chuyển tiếp của các giác quan' }),
+    G('Hypothalamus & pituitary', [0.75, 1.0, 0.3], [70, -120, 0], 0.3, hypo, { info: 'hoóc-môn, cảm giác đói, thân nhiệt' }),
+    G('Hippocampus', [1.0, 0.95, 0.3], [-50, -60, 120], 0.3, R.hippo, { info: 'biến trải nghiệm thành trí nhớ dài hạn' }),
     G('Hippocampus (L)', [1.0, 0.95, 0.3], [-50, -60, -120], 0.3, Lh.hippo, { showLabel: false }),
-    G('Amygdala', [1.0, 0.3, 0.3], [80, -60, 120], 0.35, R.amyg, { info: 'fear and emotional reactions' }),
+    G('Amygdala', [1.0, 0.3, 0.3], [80, -60, 120], 0.35, R.amyg, { info: 'nỗi sợ và phản ứng cảm xúc' }),
     G('Amygdala (L)', [1.0, 0.3, 0.3], [80, -60, -120], 0.35, Lh.amyg, { showLabel: false }),
-    G('Ventricles', [0.35, 0.5, 1.0], [30, 90, 0], 0.3, [R.vent, Lh.vent], { info: 'make & circulate cerebrospinal fluid' }),
-    G('Basal ganglia', [0.72, 0.45, 1.0], [30, -10, 95], 0.35, R.bg, { info: 'movement control and habits' }),
+    G('Ventricles', [0.35, 0.5, 1.0], [30, 90, 0], 0.3, [R.vent, Lh.vent], { info: 'tạo và lưu thông dịch não tủy' }),
+    G('Basal ganglia', [0.72, 0.45, 1.0], [30, -10, 95], 0.35, R.bg, { info: 'điều khiển vận động và thói quen' }),
     G('Basal ganglia (L)', [0.72, 0.45, 1.0], [30, -10, -95], 0.35, Lh.bg, { showLabel: false }),
-    G('Optic nerves & chiasm', [0.4, 1.0, 0.95], [160, -60, 0], 0.3, [R.optic, Lh.optic], { info: 'carry vision from the eyes' }),
+    G('Optic nerves & chiasm', [0.4, 1.0, 0.95], [160, -60, 0], 0.3, [R.optic, Lh.optic], { info: 'dẫn thị giác từ mắt' }),
   ];
 }
 
@@ -160,19 +160,19 @@ function heart() {
     vessel([[15, 50, 12], [60, 40, -8], [82, 20, -45], [62, 0, -78]], 3.2, 2.2, 3)];                                           // circumflex
 
   return [
-    G('Heart wall (myocardium)', [1.0, 0.4, 0.45], [0, -10, 240], 0, frontWall, { info: 'thick muscle that squeezes ~100,000 times a day' }),
-    G('Coronary arteries', [1.0, 0.82, 0.3], [0, 30, 330], 0, coronary, { info: 'feed the heart muscle itself' }),
-    G('Aorta', [1.0, 0.35, 0.2], [70, 190, -50], 0.05, aorta, { info: 'main artery: oxygen-rich blood to the body' }),
-    G('Pulmonary artery', [0.4, 0.55, 1.0], [-60, 170, 90], 0.05, pulm, { info: 'takes blood to the lungs for oxygen' }),
-    G('Vena cavae', [0.5, 0.42, 1.0], [-180, 40, 0], 0.05, cavae, { info: 'bring used blood back from the body' }),
-    G('Pulmonary veins', [1.0, 0.45, 0.8], [130, 60, -160], 0.05, pveins, { info: 'fresh oxygen-rich blood from the lungs' }),
-    G('Left atrium', [1.0, 0.4, 0.75], [120, 120, -90], 0.1, la, { info: 'receives blood from the lungs' }),
-    G('Right atrium', [0.55, 0.5, 1.0], [-160, 90, 30], 0.1, ra, { info: 'receives blood from the body' }),
-    G('Left ventricle', [1.0, 0.25, 0.3], [100, -70, -70], 0.2, lvBack, { info: 'strongest chamber: pumps blood to the body' }),
-    G('Right ventricle', [0.45, 0.6, 1.0], [-120, -70, 0], 0.2, rvBack, { info: 'pumps blood to the lungs' }),
-    G('Septum', [1.0, 0.6, 0.7], [0, -45, 20], 0.3, septum, { info: 'wall between the left and right heart' }),
-    G('Heart valves', [1.0, 0.95, 0.55], [0, 70, 100], 0.3, valves, { info: 'one-way doors: mitral, tricuspid, aortic, pulmonary' }),
-    G('Papillary muscles & chordae', [0.95, 1.0, 0.85], [100, -40, 40], 0.35, papil, { info: 'heart strings that hold the valves shut' }),
+    G('Heart wall (myocardium)', [1.0, 0.4, 0.45], [0, -10, 240], 0, frontWall, { info: 'cơ dày co bóp ~100.000 lần mỗi ngày' }),
+    G('Coronary arteries', [1.0, 0.82, 0.3], [0, 30, 330], 0, coronary, { info: 'nuôi chính cơ tim' }),
+    G('Aorta', [1.0, 0.35, 0.2], [70, 190, -50], 0.05, aorta, { info: 'động mạch chủ: đưa máu giàu oxy đi khắp cơ thể' }),
+    G('Pulmonary artery', [0.4, 0.55, 1.0], [-60, 170, 90], 0.05, pulm, { info: 'đưa máu lên phổi để lấy oxy' }),
+    G('Vena cavae', [0.5, 0.42, 1.0], [-180, 40, 0], 0.05, cavae, { info: 'đưa máu đã dùng từ cơ thể về' }),
+    G('Pulmonary veins', [1.0, 0.45, 0.8], [130, 60, -160], 0.05, pveins, { info: 'máu mới giàu oxy từ phổi' }),
+    G('Left atrium', [1.0, 0.4, 0.75], [120, 120, -90], 0.1, la, { info: 'nhận máu từ phổi' }),
+    G('Right atrium', [0.55, 0.5, 1.0], [-160, 90, 30], 0.1, ra, { info: 'nhận máu từ cơ thể' }),
+    G('Left ventricle', [1.0, 0.25, 0.3], [100, -70, -70], 0.2, lvBack, { info: 'buồng khỏe nhất: bơm máu đi khắp cơ thể' }),
+    G('Right ventricle', [0.45, 0.6, 1.0], [-120, -70, 0], 0.2, rvBack, { info: 'bơm máu lên phổi' }),
+    G('Septum', [1.0, 0.6, 0.7], [0, -45, 20], 0.3, septum, { info: 'vách ngăn giữa tim trái và tim phải' }),
+    G('Heart valves', [1.0, 0.95, 0.55], [0, 70, 100], 0.3, valves, { info: 'cánh cửa một chiều: van hai lá, ba lá, động mạch chủ, động mạch phổi' }),
+    G('Papillary muscles & chordae', [0.95, 1.0, 0.85], [100, -40, 40], 0.35, papil, { info: 'dây chằng giữ các van đóng kín' }),
   ];
 }
 
@@ -209,22 +209,22 @@ function kidney() {
   const adrenal = [paramSurface((u, v) => { const t = 1 + 0.35 * Math.max(0, Math.sin(v)); return [(42 * Math.cos(v) * Math.cos(u)) / t, 132 + 22 * Math.sin(v) * t, 18 * Math.cos(v) * Math.sin(u)]; }, 0, TAU, -Math.PI / 2, Math.PI / 2, { density: 1.1, gu: 30, gv: 16 })];
 
   return [
-    G('Renal capsule', [1.0, 0.5, 0.45], [0, 0, 210], 0, shell(1, (x, y, z) => z > 0, 0.6), { info: 'tough protective outer layer' }),
+    G('Renal capsule', [1.0, 0.5, 0.45], [0, 0, 210], 0, shell(1, (x, y, z) => z > 0, 0.6), { info: 'lớp vỏ ngoài dai để bảo vệ' }),
     G('Renal capsule (back)', [1.0, 0.5, 0.45], [0, 0, -210], 0, shell(1, (x, y, z) => z <= 0, 0.6), { showLabel: false }),
-    G('Renal cortex', [1.0, 0.7, 0.35], [0, 0, 125], 0.08, shell(0.9, (x, y, z) => z > 0, 0.35), { info: 'outer layer where blood is filtered' }),
+    G('Renal cortex', [1.0, 0.7, 0.35], [0, 0, 125], 0.08, shell(0.9, (x, y, z) => z > 0, 0.35), { info: 'lớp ngoài, nơi máu được lọc' }),
     G('Renal cortex (back)', [1.0, 0.7, 0.35], [0, 0, -125], 0.08, shell(0.9, (x, y, z) => z <= 0, 0.35), { showLabel: false }),
-    G('Medulla (renal pyramids)', [0.75, 0.45, 1.0], [45, 0, 0], 0.25, pyramids, { info: 'concentrate urine and save water' }),
-    G('Nephrons', [0.5, 1.0, 0.45], [180, 0, 70], 0.35, nephrons, { info: '~1 million tiny filters per kidney' }),
-    G('Calyces & renal pelvis', [1.0, 0.9, 0.35], [-70, 0, 0], 0.25, calyces, { info: 'collect urine and funnel it out' }),
-    G('Ureter', [1.0, 0.95, 0.65], [-70, -70, 0], 0.2, ureter, { info: 'carries urine down to the bladder' }),
-    G('Renal artery', [1.0, 0.25, 0.25], [-120, 80, 45], 0.15, artery, { info: '~1 L of blood per minute in to be cleaned' }),
-    G('Renal vein', [0.4, 0.5, 1.0], [-120, -80, -45], 0.15, vein, { info: 'returns the cleaned blood to the body' }),
-    G('Adrenal gland', [1.0, 0.82, 0.25], [0, 150, 0], 0.05, adrenal, { info: 'makes adrenaline and cortisol' }),
+    G('Medulla (renal pyramids)', [0.75, 0.45, 1.0], [45, 0, 0], 0.25, pyramids, { info: 'cô đặc nước tiểu và giữ nước' }),
+    G('Nephrons', [0.5, 1.0, 0.45], [180, 0, 70], 0.35, nephrons, { info: '~1 triệu bộ lọc nhỏ trong mỗi quả thận' }),
+    G('Calyces & renal pelvis', [1.0, 0.9, 0.35], [-70, 0, 0], 0.25, calyces, { info: 'gom nước tiểu và dẫn ra ngoài' }),
+    G('Ureter', [1.0, 0.95, 0.65], [-70, -70, 0], 0.2, ureter, { info: 'dẫn nước tiểu xuống bàng quang' }),
+    G('Renal artery', [1.0, 0.25, 0.25], [-120, 80, 45], 0.15, artery, { info: '~1 lít máu mỗi phút vào để được lọc sạch' }),
+    G('Renal vein', [0.4, 0.5, 1.0], [-120, -80, -45], 0.15, vein, { info: 'trả máu đã lọc sạch về cơ thể' }),
+    G('Adrenal gland', [1.0, 0.82, 0.25], [0, 150, 0], 0.05, adrenal, { info: 'tạo ra adrenaline và cortisol' }),
   ];
 }
 
 export const ANATOMY = [
-  { name: 'Human Brain', groups: brain, color: [1.0, 0.5, 0.7], tilt: 12, viewYaw: 0.75, fact: '~86 billion neurons · 1.4 kg · 20 % of your energy' },
-  { name: 'Human Heart', groups: heart, color: [1.0, 0.28, 0.32], tilt: 6, viewYaw: 0.35, pulse: { bpm: 72, amp: 0.05 }, fact: '4 chambers · 4 valves · ~7,000 L of blood a day' },
-  { name: 'Kidney', groups: kidney, color: [1.0, 0.55, 0.45], tilt: 6, viewYaw: 0.7, fact: '12 cm · filters ~180 L of blood plasma a day' },
+  { name: 'Human Brain', groups: brain, color: [1.0, 0.5, 0.7], tilt: 12, viewYaw: 0.75, fact: '~86 tỷ nơ-ron · 1,4 kg · 20 % năng lượng của bạn' },
+  { name: 'Human Heart', groups: heart, color: [1.0, 0.28, 0.32], tilt: 6, viewYaw: 0.35, pulse: { bpm: 72, amp: 0.05 }, fact: '4 buồng · 4 van · ~7.000 lít máu mỗi ngày' },
+  { name: 'Kidney', groups: kidney, color: [1.0, 0.55, 0.45], tilt: 6, viewYaw: 0.7, fact: '12 cm · lọc ~180 lít huyết tương mỗi ngày' },
 ];

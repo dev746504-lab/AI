@@ -149,5 +149,5 @@ function sportsCar() {
 }
 
 export const VEHICLES = [
-  { name: 'Sports Car', groups: sportsCar, color: [1.0, 0.25, 0.25], tilt: 16, viewYaw: 0.75, fact: '440 × 185 × 130 cm · 260 cm wheelbase · front engine, RWD' },
+  { name: 'Sports Car', groups: sportsCar, color: [1.0, 0.25, 0.25], tilt: 16, viewYaw: 0.75, fact: '440 × 185 × 130 cm · trục cơ sở 260 cm · động cơ trước, dẫn động cầu sau' },
 ];

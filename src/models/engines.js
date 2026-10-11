@@ -404,8 +404,8 @@ function radial9() {
 
 export const ENGINES = [
   // tilt: degrees the model leans toward the viewer; viewYaw: 3/4 angle the exploded view eases to
-  { name: 'Inline-4 Engine', groups: inline4, color: [0.35, 0.75, 1.0], tilt: 20, viewYaw: 0.6, fact: 'DOHC 16-valve · 4 cylinders · firing 1-3-4-2' },
-  { name: 'Supercharged HEMI V8', groups: hemiV8, color: [1.0, 0.45, 0.15], tilt: 22, viewYaw: 0.55, fact: '90° V8 · pushrod OHV · hemispherical chambers' },
-  { name: 'Turbofan Jet Engine', groups: turbofan, color: [0.3, 0.9, 1.0], tilt: 12, viewYaw: 0.45, fact: 'Fan → compressors → combustor → turbines → nozzle' },
-  { name: 'Radial Aircraft Engine', groups: radial9, color: [1.0, 0.78, 0.35], tilt: 10, viewYaw: 0.5, fact: '9 cylinders · master & link rods · air-cooled' },
+  { name: 'Inline-4 Engine', groups: inline4, color: [0.35, 0.75, 1.0], tilt: 20, viewYaw: 0.6, fact: 'DOHC 16 van · 4 xi-lanh · thứ tự nổ 1-3-4-2' },
+  { name: 'Supercharged HEMI V8', groups: hemiV8, color: [1.0, 0.45, 0.15], tilt: 22, viewYaw: 0.55, fact: 'V8 góc 90° · OHV thanh đẩy · buồng đốt bán cầu' },
+  { name: 'Turbofan Jet Engine', groups: turbofan, color: [0.3, 0.9, 1.0], tilt: 12, viewYaw: 0.45, fact: 'Quạt → máy nén → buồng đốt → tua-bin → vòi phun' },
+  { name: 'Radial Aircraft Engine', groups: radial9, color: [1.0, 0.78, 0.35], tilt: 10, viewYaw: 0.5, fact: '9 xi-lanh · thanh truyền chính & phụ · làm mát bằng khí' },
 ];

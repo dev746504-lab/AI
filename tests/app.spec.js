@@ -44,9 +44,9 @@ test('01 start screen, then keyboard-only mode (real-time loop)', async ({ page 
 test('gesture sensitivity selector applies static presets live without changing snap or pinch', async ({ page }) => {
   const noErrors = watchErrors(page);
   await openApp(page);
-  const select = page.getByLabel('Gesture sensitivity');
+  const select = page.getByLabel('Độ nhạy cử chỉ');
   await expect(select).toHaveValue('standard');
-  await expect(select.locator('option')).toHaveText(['Standard', 'More forgiving']);
+  await expect(select.locator('option')).toHaveText(['Tiêu chuẩn', 'Dễ tính hơn']);
   expect((await status(page)).gestureSensitivity).toBe('standard');
   expect(await page.evaluate(async () => {
     const { STANDARD } = await import('/src/logic/gestures.js');
@@ -269,7 +269,7 @@ test('08 keyboard, mouse wheel, slider, catalog chips and help', async ({ page }
   await play(page, 3.2, null);
   expect((await status(page)).name).toBe('Turtle Tower');
 
-  await page.locator('.tab', { hasText: 'Engines' }).click();               // category tab
+  await page.locator('.tab', { hasText: 'Động cơ' }).click();               // category tab
   await page.getByRole('button', { name: 'Supercharged HEMI V8' }).click();  // catalog chip
   await play(page, 3.2, null);
   s = await status(page);

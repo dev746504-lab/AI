@@ -40,7 +40,7 @@ test('camera denied: friendly message and the app keeps working without it', asy
   const page = await context.newPage();
   await page.goto(`${baseURL}/?n=100000`);
   await page.click('#bStartCam');
-  await expect(page.locator('#startMsg')).toContainText(/denied|No camera|Camera error/, { timeout: 30_000 });
+  await expect(page.locator('#startMsg')).toContainText(/từ chối|Không tìm thấy camera|Lỗi camera/, { timeout: 30_000 });
   await shot(page, 'cam-d-permission-denied-message');
   await page.click('#bStartNoCam');
   await expect(page.locator('#start')).toBeHidden();

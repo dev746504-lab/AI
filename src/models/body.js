@@ -54,18 +54,18 @@ function skeletonParts() {
 function skeleton() {
   const P = skeletonParts(), BONE = [0.95, 0.93, 0.85];
   return [
-    G('Skull', BONE, [0, 70, 20], 0, P.skull, { info: '22 bones that protect the brain' }),
-    G('Rib cage & sternum', [0.8, 0.9, 1.0], [0, 15, 70], 0, P.ribs, { info: '12 pairs of ribs shield heart & lungs' }),
-    G('Spine (vertebral column)', [1.0, 0.8, 0.5], [0, 0, -70], 0.1, P.spine, { info: '33 vertebrae guard the spinal cord' }),
-    G('Shoulder girdle', [0.7, 1.0, 0.8], [0, 35, -45], 0.05, P.shoulders, { info: 'collarbones and shoulder blades' }),
-    G('Arm bones', [0.6, 0.85, 1.0], [70, 10, 0], 0.05, P.arms[1], { info: 'humerus, radius and ulna' }),
+    G('Skull', BONE, [0, 70, 20], 0, P.skull, { info: '22 xương bảo vệ não' }),
+    G('Rib cage & sternum', [0.8, 0.9, 1.0], [0, 15, 70], 0, P.ribs, { info: '12 đôi xương sườn che chắn tim & phổi' }),
+    G('Spine (vertebral column)', [1.0, 0.8, 0.5], [0, 0, -70], 0.1, P.spine, { info: '33 đốt sống bảo vệ tủy sống' }),
+    G('Shoulder girdle', [0.7, 1.0, 0.8], [0, 35, -45], 0.05, P.shoulders, { info: 'xương đòn và xương bả vai' }),
+    G('Arm bones', [0.6, 0.85, 1.0], [70, 10, 0], 0.05, P.arms[1], { info: 'xương cánh tay, xương quay và xương trụ' }),
     G('Arm bones (L)', [0.6, 0.85, 1.0], [-70, 10, 0], 0.05, P.arms[-1], { showLabel: false }),
-    G('Hand bones', [1.0, 0.7, 0.9], [110, -20, 30], 0.1, P.hands[1], { info: '27 bones in each hand' }),
+    G('Hand bones', [1.0, 0.7, 0.9], [110, -20, 30], 0.1, P.hands[1], { info: '27 xương ở mỗi bàn tay' }),
     G('Hand bones (L)', [1.0, 0.7, 0.9], [-110, -20, 30], 0.1, P.hands[-1], { showLabel: false }),
-    G('Pelvis', [1.0, 0.9, 0.6], [0, -15, 50], 0.1, P.pelvis, { info: 'carries the upper body onto the legs' }),
-    G('Leg bones', [0.75, 0.75, 1.0], [35, -45, 0], 0.1, P.legs[1], { info: 'the femur is the longest bone' }),
+    G('Pelvis', [1.0, 0.9, 0.6], [0, -15, 50], 0.1, P.pelvis, { info: 'nâng thân trên xuống hai chân' }),
+    G('Leg bones', [0.75, 0.75, 1.0], [35, -45, 0], 0.1, P.legs[1], { info: 'xương đùi là xương dài nhất' }),
     G('Leg bones (L)', [0.75, 0.75, 1.0], [-35, -45, 0], 0.1, P.legs[-1], { showLabel: false }),
-    G('Foot bones', [1.0, 0.85, 0.5], [45, -80, 40], 0.15, P.feet[1], { info: '26 bones in each foot' }),
+    G('Foot bones', [1.0, 0.85, 0.5], [45, -80, 40], 0.15, P.feet[1], { info: '26 xương ở mỗi bàn chân' }),
     G('Foot bones (L)', [1.0, 0.85, 0.5], [-45, -80, 40], 0.15, P.feet[-1], { showLabel: false }),
   ];
 }
@@ -116,24 +116,24 @@ function humanBody() {
       polyline([[-3, 190, 3], [s * 17, 178, 5], [s * 21, 100, 5], [s * 22, 22, 3], [s * 22, 4, 18]], 0, 4));
   }
   return [
-    G('Skin', [1.0, 0.75, 0.62], [0, 0, 190], 0, skin(true), { info: 'largest organ: shields, senses, cools' }),
+    G('Skin', [1.0, 0.75, 0.62], [0, 0, 190], 0, skin(true), { info: 'cơ quan lớn nhất: bảo vệ, cảm nhận, làm mát' }),
     G('Skin (back)', [1.0, 0.75, 0.62], [0, 0, -190], 0, skin(false), { showLabel: false }),
-    G('Brain', [1.0, 0.5, 0.7], [0, 55, 100], 0.2, organs.brain, { info: 'control centre: 86 billion neurons' }),
-    G('Lungs', [0.55, 0.75, 1.0], [0, 25, 110], 0.2, organs.lungs, { info: 'swap carbon dioxide for oxygen' }),
-    G('Heart', [1.0, 0.25, 0.3], [0, 5, 135], 0.22, organs.heart, { info: 'pumps ~7,000 litres of blood a day' }),
-    G('Liver', [0.8, 0.4, 0.25], [-35, -5, 115], 0.22, organs.liver, { info: '500+ jobs: filters, stores, makes bile' }),
-    G('Stomach', [1.0, 0.65, 0.5], [35, -5, 115], 0.22, organs.stomach, { info: 'acid bath that starts digestion' }),
-    G('Intestines', [1.0, 0.8, 0.55], [0, -25, 115], 0.24, organs.intestines, { info: '7 m that absorb the nutrients' }),
-    G('Kidneys', [1.0, 0.55, 0.45], [0, -10, 85], 0.24, organs.kidneys, { info: 'filter the blood, make urine' }),
-    G('Bladder', [1.0, 0.95, 0.5], [0, -40, 105], 0.24, organs.bladder, { info: 'stores ~0.5 L of urine' }),
-    G('Nervous system', [1.0, 0.9, 0.3], [-140, 0, 0], 0.3, nerves, { info: 'brain, spinal cord and 72 km of nerves' }),
-    G('Arteries', [1.0, 0.3, 0.25], [140, 0, 0], 0.3, arteries, { info: 'carry oxygen-rich blood away from the heart' }),
-    G('Veins', [0.35, 0.5, 1.0], [270, 0, 0], 0.3, veins, { info: 'return blood to the heart' }),
-    G('Skeleton', [0.95, 0.93, 0.85], [0, 0, -120], 0.35, bones, { info: '206 bones: frame, levers and blood factory' }),
+    G('Brain', [1.0, 0.5, 0.7], [0, 55, 100], 0.2, organs.brain, { info: 'trung tâm điều khiển: 86 tỷ nơ-ron' }),
+    G('Lungs', [0.55, 0.75, 1.0], [0, 25, 110], 0.2, organs.lungs, { info: 'đổi khí cacbonic lấy oxy' }),
+    G('Heart', [1.0, 0.25, 0.3], [0, 5, 135], 0.22, organs.heart, { info: 'bơm ~7.000 lít máu mỗi ngày' }),
+    G('Liver', [0.8, 0.4, 0.25], [-35, -5, 115], 0.22, organs.liver, { info: 'hơn 500 nhiệm vụ: lọc, dự trữ, tạo mật' }),
+    G('Stomach', [1.0, 0.65, 0.5], [35, -5, 115], 0.22, organs.stomach, { info: 'bể axit bắt đầu quá trình tiêu hóa' }),
+    G('Intestines', [1.0, 0.8, 0.55], [0, -25, 115], 0.24, organs.intestines, { info: 'dài 7 m, hấp thụ chất dinh dưỡng' }),
+    G('Kidneys', [1.0, 0.55, 0.45], [0, -10, 85], 0.24, organs.kidneys, { info: 'lọc máu, tạo nước tiểu' }),
+    G('Bladder', [1.0, 0.95, 0.5], [0, -40, 105], 0.24, organs.bladder, { info: 'chứa ~0,5 lít nước tiểu' }),
+    G('Nervous system', [1.0, 0.9, 0.3], [-140, 0, 0], 0.3, nerves, { info: 'não, tủy sống và 72 km dây thần kinh' }),
+    G('Arteries', [1.0, 0.3, 0.25], [140, 0, 0], 0.3, arteries, { info: 'đưa máu giàu oxy rời khỏi tim' }),
+    G('Veins', [0.35, 0.5, 1.0], [270, 0, 0], 0.3, veins, { info: 'đưa máu trở về tim' }),
+    G('Skeleton', [0.95, 0.93, 0.85], [0, 0, -120], 0.35, bones, { info: '206 xương: khung, đòn bẩy và nhà máy sản xuất máu' }),
   ];
 }
 
 export const BODY = [
-  { name: 'Skeleton', groups: skeleton, color: [0.95, 0.93, 0.85], tilt: 4, viewYaw: 0.5, fact: '206 bones · the femur is the longest' },
-  { name: 'Human Body', groups: humanBody, color: [1.0, 0.72, 0.6], tilt: 4, viewYaw: 0.55, fact: '11 organ systems · 37 trillion cells' },
+  { name: 'Skeleton', groups: skeleton, color: [0.95, 0.93, 0.85], tilt: 4, viewYaw: 0.5, fact: '206 xương · xương đùi dài nhất' },
+  { name: 'Human Body', groups: humanBody, color: [1.0, 0.72, 0.6], tilt: 4, viewYaw: 0.55, fact: '11 hệ cơ quan · 37 nghìn tỷ tế bào' },
 ];

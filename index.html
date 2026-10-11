@@ -1,15 +1,15 @@
 <!doctype html>
-<html lang="en">
+<html lang="vi">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>WonderSnap</title>
-  <meta name="description" content="Gesture-controlled 3D wonders, engines and cars made of glowing GPU particles.">
+  <meta name="description" content="Kỳ quan, động cơ và xe 3D điều khiển bằng cử chỉ tay, tạo nên từ các hạt sáng chạy trên GPU.">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='22' fill='none' stroke='%2366e0ff' stroke-width='4'/%3E%3Ccircle cx='32' cy='32' r='8' fill='%23ffd166'/%3E%3C/svg%3E">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <canvas id="gl" aria-label="Particle scene"></canvas>
+  <canvas id="gl" aria-label="Cảnh hạt 3D"></canvas>
   <canvas id="overlay" aria-hidden="true"></canvas>
   <video id="cam" playsinline muted></video>
 
@@ -17,109 +17,109 @@
     <div class="logo" aria-hidden="true"><span></span></div>
     <div>
       <div class="brand-name">WonderSnap</div>
-      <div class="brand-sub">snap · form · explode — with your hand</div>
+      <div class="brand-sub">búng tay · dựng hình · nổ tung — bằng bàn tay bạn</div>
     </div>
   </header>
 
   <aside id="panel" class="panel glass">
     <section class="now">
-      <div class="cat" id="cat">Wonders</div>
+      <div class="cat" id="cat">Kỳ quan</div>
       <h1 id="name">Turtle Tower</h1>
       <p id="fact" class="fact"></p>
     </section>
 
     <section class="status">
       <div class="row">
-        <span class="k">Scene</span><span id="statePill" class="pill" data-state="idle">idle</span>
+        <span class="k">Cảnh</span><span id="statePill" class="pill" data-state="idle">chờ</span>
       </div>
       <div class="row">
-        <span class="k">Hand</span><span id="posePill" class="pill pose">no hand</span>
+        <span class="k">Bàn tay</span><span id="posePill" class="pill pose">không thấy tay</span>
       </div>
       <div class="sensitivity">
         <div class="sensitivity-head">
-          <label class="k" for="gestureSensitivity">Gesture sensitivity</label>
+          <label class="k" for="gestureSensitivity">Độ nhạy cử chỉ</label>
           <select id="gestureSensitivity" aria-describedby="gestureSensitivityHint">
-            <option value="standard" selected>Standard</option>
-            <option value="forgiving">More forgiving</option>
+            <option value="standard" selected>Tiêu chuẩn</option>
+            <option value="forgiving">Dễ tính hơn</option>
           </select>
         </div>
-        <div id="gestureSensitivityHint" class="hint">More forgiving helps recognize less distinct hand poses.</div>
+        <div id="gestureSensitivityHint" class="hint">Chế độ dễ tính giúp nhận ra các tư thế tay chưa rõ ràng.</div>
       </div>
       <div class="meter">
-        <div class="meter-head"><span class="k">Hand openness</span><b id="openPct">0%</b></div>
+        <div class="meter-head"><span class="k">Độ mở bàn tay</span><b id="openPct">0%</b></div>
         <div class="bar"><i id="openBar"></i></div>
       </div>
       <div id="explodeBox" class="meter explode" hidden>
-        <div class="meter-head"><span class="k">Exploded view</span><b id="explodePct">0%</b></div>
-        <input id="explodeSlider" type="range" min="0" max="100" value="0" aria-label="Exploded view amount">
-        <div class="hint">Open your hand to pull it apart · close it to assemble</div>
+        <div class="meter-head"><span class="k">Chế độ nổ tung</span><b id="explodePct">0%</b></div>
+        <input id="explodeSlider" type="range" min="0" max="100" value="0" aria-label="Mức nổ tung">
+        <div class="hint">Mở tay để tách các bộ phận · nắm lại để ghép</div>
       </div>
     </section>
 
     <section>
-      <div class="k">Gestures</div>
+      <div class="k">Cử chỉ</div>
       <ul id="guide" class="guide"></ul>
     </section>
 
     <section class="buttons">
-      <button id="bSnap" title="Space">🫰 Snap</button>
-      <button id="bForm" title="F">✊ Form</button>
-      <button id="bOpen" title="O">✋ Release</button>
-      <button id="bNext" title="V / →">✌ Next</button>
+      <button id="bSnap" title="Space">🫰 Búng tay</button>
+      <button id="bForm" title="F">✊ Dựng hình</button>
+      <button id="bOpen" title="O">✋ Thả ra</button>
+      <button id="bNext" title="V / →">✌ Kế tiếp</button>
     </section>
   </aside>
 
   <div id="bigTitle" class="big-title"><div class="t"></div><div class="s"></div></div>
 
-  <nav id="catalog" class="catalog glass" aria-label="Models">
+  <nav id="catalog" class="catalog glass" aria-label="Mô hình">
     <div id="catTabs" class="tabs" role="tablist"></div>
     <div id="catChips" class="chips"></div>
   </nav>
 
   <section id="partCard" class="part-card glass" hidden aria-live="polite">
-    <div class="phead"><i class="swatch"></i><span class="pname"></span><button id="partClose" class="x" title="Close (Esc)">✕</button></div>
+    <div class="phead"><i class="swatch"></i><span class="pname"></span><button id="partClose" class="x" title="Đóng (Esc)">✕</button></div>
     <div class="pinfo"></div>
     <div class="pmodel"></div>
-    <div class="pactions"><button id="partPull">🤏 Pull out</button><button id="partSpeak">🔊 Read aloud</button></div>
-    <div class="phint">Point ☝ at another part · pinch 🤏 to pull this one out</div>
+    <div class="pactions"><button id="partPull">🤏 Kéo ra</button><button id="partSpeak">🔊 Đọc to</button></div>
+    <div class="phint">Chỉ ☝ vào bộ phận khác · chụm 🤏 để kéo bộ phận này ra</div>
   </section>
 
   <section id="quiz" class="quiz glass" hidden aria-live="polite">
     <div class="q"></div><div class="qs"></div><div class="qf"></div>
-    <button id="quizStop" class="x" title="Stop quiz (Q)">✕</button>
+    <button id="quizStop" class="x" title="Dừng đố vui (Q)">✕</button>
   </section>
 
   <div class="top-right">
     <div id="stats" class="stats glass"></div>
     <div class="icons">
-      <button id="bCam" class="icon" title="Camera on/off (C)">📷</button>
-      <button id="bLabels" class="icon on" title="Part labels (L)">🏷️</button>
-      <button id="bRotate" class="icon on" title="Auto-rotate (R)">⟳</button>
-      <button id="bHandRot" class="icon on" title="Hand rotation: twist your hand to turn the model (G)">🔄</button>
-      <button id="bCut" class="icon" title="Cut-away cross-section (X)">✂</button>
-      <button id="bQuiz" class="icon" title="Quiz: find the part (Q)">🎓</button>
-      <button id="bVoice" class="icon" title="Voice commands + read aloud (M)">🎤</button>
-      <button id="bRec" class="icon" title="Record a video (K)">⏺</button>
-      <button id="bDemo" class="icon" title="Play demo (D)">▶</button>
-      <button id="bHelp" class="icon" title="Keyboard help (H)">?</button>
+      <button id="bCam" class="icon" title="Bật/tắt camera (C)">📷</button>
+      <button id="bLabels" class="icon on" title="Nhãn bộ phận (L)">🏷️</button>
+      <button id="bRotate" class="icon on" title="Tự xoay (R)">⟳</button>
+      <button id="bHandRot" class="icon on" title="Xoay bằng tay: xoay bàn tay để quay mô hình (G)">🔄</button>
+      <button id="bCut" class="icon" title="Mặt cắt ngang (X)">✂</button>
+      <button id="bQuiz" class="icon" title="Đố vui: tìm bộ phận (Q)">🎓</button>
+      <button id="bVoice" class="icon" title="Lệnh giọng nói + đọc to (M)">🎤</button>
+      <button id="bRec" class="icon" title="Quay video (K)">⏺</button>
+      <button id="bDemo" class="icon" title="Chạy demo (D)">▶</button>
+      <button id="bHelp" class="icon" title="Trợ giúp phím tắt (H)">?</button>
     </div>
   </div>
 
   <div id="help" class="help glass" hidden>
-    <h2>Controls</h2>
+    <h2>Điều khiển</h2>
     <table>
-      <tr><td><kbd>Space</kbd></td><td>Snap — summon / dissolve</td></tr>
-      <tr><td><kbd>F</kbd> / <kbd>O</kbd></td><td>Fist (form) / Open hand (release)</td></tr>
-      <tr><td><kbd>V</kbd> <kbd>→</kbd> <kbd>←</kbd></td><td>Next / previous model</td></tr>
-      <tr><td><kbd>E</kbd> <kbd>↑</kbd> <kbd>↓</kbd> wheel</td><td>Exploded view (engines &amp; car)</td></tr>
-      <tr><td>twist hand</td><td>Rotate the model (raise / lower = tilt) · <kbd>G</kbd> on/off</td></tr>
-      <tr><td>☝ point · 🤏 pinch</td><td>Pick a part (or click it) · pull it out</td></tr>
-      <tr><td>🙌 two hands</td><td>Zoom (also <kbd>+</kbd> <kbd>-</kbd> <kbd>0</kbd>, ctrl + wheel)</td></tr>
-      <tr><td><kbd>X</kbd> <kbd>,</kbd> <kbd>.</kbd></td><td>Cut-away slice (move hand / mouse)</td></tr>
-      <tr><td><kbd>Q</kbd> <kbd>M</kbd> <kbd>K</kbd> <kbd>I</kbd></td><td>Quiz · voice · record video · describe part</td></tr>
-      <tr><td>drag</td><td>Rotate the model</td></tr>
-      <tr><td><kbd>R</kbd> <kbd>L</kbd> <kbd>T</kbd></td><td>Auto-rotate · labels · trails</td></tr>
-      <tr><td><kbd>C</kbd> <kbd>D</kbd> <kbd>H</kbd></td><td>Camera · demo · this help</td></tr>
+      <tr><td><kbd>Space</kbd></td><td>Búng tay — gọi hạt ra / làm tan</td></tr>
+      <tr><td><kbd>F</kbd> / <kbd>O</kbd></td><td>Nắm tay (dựng hình) / Mở tay (thả ra)</td></tr>
+      <tr><td><kbd>V</kbd> <kbd>→</kbd> <kbd>←</kbd></td><td>Mô hình kế tiếp / trước đó</td></tr>
+      <tr><td><kbd>E</kbd> <kbd>↑</kbd> <kbd>↓</kbd> wheel</td><td>Nổ tung (động cơ &amp; xe)</td></tr>
+      <tr><td>xoay tay</td><td>Xoay mô hình (nâng / hạ tay = nghiêng) · <kbd>G</kbd> bật/tắt</td></tr>
+      <tr><td>☝ chỉ · 🤏 chụm</td><td>Chọn bộ phận (hoặc nhấp chuột) · kéo ra</td></tr>
+      <tr><td>🙌 hai tay</td><td>Thu phóng (hoặc <kbd>+</kbd> <kbd>-</kbd> <kbd>0</kbd>, ctrl + lăn chuột)</td></tr>
+      <tr><td><kbd>X</kbd> <kbd>,</kbd> <kbd>.</kbd></td><td>Lát cắt (di chuyển tay / chuột)</td></tr>
+      <tr><td><kbd>Q</kbd> <kbd>M</kbd> <kbd>K</kbd> <kbd>I</kbd></td><td>Đố vui · giọng nói · quay video · mô tả bộ phận</td></tr>
+      <tr><td>kéo chuột</td><td>Xoay mô hình</td></tr>
+      <tr><td><kbd>R</kbd> <kbd>L</kbd> <kbd>T</kbd></td><td>Tự xoay · nhãn · vệt sáng</td></tr>
+      <tr><td><kbd>C</kbd> <kbd>D</kbd> <kbd>H</kbd></td><td>Camera · demo · trợ giúp này</td></tr>
     </table>
   </div>
 
@@ -129,18 +129,18 @@
     <div class="start-card glass">
       <div class="logo big" aria-hidden="true"><span></span></div>
       <h1>WonderSnap</h1>
-      <p>Glowing 3D wonders, the human body (brain, beating heart, breathing lungs, eye, ear, skeleton…), DNA, a cell, engines, vehicles and machines made of up to a quarter-million light particles — controlled by your hand in front of the webcam.</p>
+      <p>Các kỳ quan 3D phát sáng, cơ thể người (não, tim đập, phổi thở, mắt, tai, bộ xương…), DNA, tế bào, động cơ, phương tiện và máy móc, tạo nên từ tới một phần tư triệu hạt sáng — điều khiển bằng bàn tay trước webcam.</p>
       <ol class="steps">
-        <li><b>Snap</b> your fingers to summon the particles.</li>
-        <li>Make a <b>fist</b> to form a wonder, engine or car.</li>
-        <li><b>Open</b> your hand: wonders morph to the next one — organs, engines and the car <b>explode</b> to show every part inside, named with what it does. Close your hand to put it back together.</li>
-        <li><b>Twist</b> your hand to turn the model, raise or lower it to tilt; <b>two hands</b> zoom.</li>
-        <li><b>Point</b> ☝ at a part to learn what it does, <b>pinch</b> 🤏 to pull it out. Try the 🎓 quiz, 🎤 voice, ✂ cut-away and ⏺ recording.</li>
-        <li>Show <b>✌</b> to jump to the next model.</li>
+        <li><b>Búng tay</b> để gọi các hạt ra.</li>
+        <li><b>Nắm tay</b> để dựng một kỳ quan, động cơ hoặc xe.</li>
+        <li><b>Mở tay</b>: kỳ quan sẽ chuyển sang cái kế tiếp — cơ quan, động cơ và xe sẽ <b>nổ tung</b> để lộ từng bộ phận bên trong, kèm tên và chức năng. Nắm tay lại để ghép về như cũ.</li>
+        <li><b>Xoay</b> bàn tay để quay mô hình, nâng hoặc hạ để nghiêng; <b>hai tay</b> để thu phóng.</li>
+        <li><b>Chỉ tay</b> ☝ vào một bộ phận để biết nó làm gì, <b>chụm ngón</b> 🤏 để kéo ra. Thử thêm 🎓 đố vui, 🎤 giọng nói, ✂ mặt cắt và ⏺ quay video.</li>
+        <li>Giơ <b>✌</b> để nhảy sang mô hình kế tiếp.</li>
       </ol>
       <div class="start-buttons">
-        <button id="bStartCam" class="primary">Start with camera</button>
-        <button id="bStartNoCam">Continue without camera</button>
+        <button id="bStartCam" class="primary">Bắt đầu với camera</button>
+        <button id="bStartNoCam">Tiếp tục không dùng camera</button>
       </div>
       <p id="startMsg" class="start-msg"></p>
     </div>

@@ -21,13 +21,13 @@ export class HandCamera {
   }
 
   async start(onStatus = () => {}) {
-    if (!navigator.mediaDevices?.getUserMedia) throw new Error('This browser cannot access a camera (getUserMedia missing — use https or localhost).');
-    onStatus('Requesting camera…');
+    if (!navigator.mediaDevices?.getUserMedia) throw new Error('Trình duyệt này không truy cập được camera (thiếu getUserMedia — hãy dùng https hoặc localhost).');
+    onStatus('Đang xin quyền camera…');
     this.stream = await navigator.mediaDevices.getUserMedia({ video: { width: { ideal: 1280 }, height: { ideal: 720 }, facingMode: 'user', frameRate: { ideal: 30 } }, audio: false });
     this.video.srcObject = this.stream;
     this.video.muted = true; this.video.playsInline = true;
     await this.video.play();
-    onStatus('Loading hand tracker…');
+    onStatus('Đang tải bộ nhận diện bàn tay…');
     const { FilesetResolver, HandLandmarker } = await import(VISION);
     const fileset = await FilesetResolver.forVisionTasks(WASM);
     const make = (delegate) => HandLandmarker.createFromOptions(fileset, {

@@ -79,7 +79,7 @@ export function speak(text) {
   if (!('speechSynthesis' in window) || typeof SpeechSynthesisUtterance === 'undefined') return false;
   window.speechSynthesis.cancel();
   const u = new SpeechSynthesisUtterance(text);
-  u.rate = 1.02; u.pitch = 1.0;
+  u.rate = 1.02; u.pitch = 1.0; u.lang = 'vi-VN';
   window.speechSynthesis.speak(u);
   return true;
 }
