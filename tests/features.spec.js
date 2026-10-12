@@ -248,20 +248,20 @@ test('20 record a video of the session (real-time)', async ({ page }) => {
   noErrors();
 });
 
-test('21 category tabs show each collection; the catalog has 34 models', async ({ page }) => {
+test('21 category tabs show each collection; the catalog has 41 models', async ({ page }) => {
   const noErrors = watchErrors(page);
   await openApp(page);
   const tabs = await page.locator('.tab').allTextContents();
-  expect(tabs.map((t) => t.split(' ·')[0])).toEqual(['Kỳ quan', 'Giải phẫu', 'Sinh học', 'Động cơ', 'Phương tiện', 'Máy móc']);
+  expect(tabs.map((t) => t.split(' ·')[0])).toEqual(['Kỳ quan', 'Giải phẫu', 'Sinh học', 'Động cơ', 'Phương tiện', 'Máy móc', 'Trí tuệ nhân tạo']);
   let total = 0;
-  for (const t of ['Kỳ quan', 'Giải phẫu', 'Sinh học', 'Động cơ', 'Phương tiện', 'Máy móc']) {
+  for (const t of ['Kỳ quan', 'Giải phẫu', 'Sinh học', 'Động cơ', 'Phương tiện', 'Máy móc', 'Trí tuệ nhân tạo']) {
     await page.locator('.tab', { hasText: t }).click();
     const n = await page.locator('.chip:visible').count();
     expect(n).toBeGreaterThan(0);
     total += n;
     if (t === 'Giải phẫu') await shot(page, '21a-anatomy-tab');
   }
-  expect(total).toBe(34);
+  expect(total).toBe(41);
   await page.locator('.tab', { hasText: 'Máy móc' }).click();
   await page.getByRole('button', { name: 'Mechanical Watch' }).click();
   await play(page, 3.2, null);

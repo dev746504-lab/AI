@@ -69,7 +69,7 @@ test('regression: reading particles back does not freeze the transform-feedback 
   expect(r.err).toBe(0);
 });
 
-test('rendered frame: model on the right third, tall tower fills the height, glow + globe drawn', async ({ page }) => {
+test('rendered frame: model centred, tall tower fills the height, glow + globe drawn', async ({ page }) => {
   const noErrors = watchErrors(page);
   await openApp(page, 'n=200000&trails=1');
   await page.evaluate(() => window.wonderSnap.select(1));                    // Eiffel Tower
@@ -90,7 +90,7 @@ test('rendered frame: model on the right third, tall tower fills the height, glo
   });
   console.log(px);
   expect(px.n).toBeGreaterThan(2000);                     // bright particles
-  expect(px.cx).toBeGreaterThan(px.W * 0.55);             // placed on the right side (hand on the left)
+  expect(Math.abs(px.cx - px.W / 2)).toBeLessThan(px.W * 0.1);   // centred on screen
   expect(px.h).toBeGreaterThan(px.H * 0.6);               // the tower fills the height
   expect(px.dim).toBeGreaterThan(5000);                   // soft halo + globe lines
   expect(px.err).toBe(0);

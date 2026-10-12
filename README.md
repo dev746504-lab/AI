@@ -28,7 +28,7 @@ Sau đó mở **http://localhost:5173** bằng Chrome hoặc Edge và bấm **B�
 | **Nhận diện bàn tay** | [MediaPipe Hand Landmarker](https://ai.google.dev/edge/mediapipe/solutions/vision/hand_landmarker) theo dõi tối đa hai bàn tay (21 điểm mốc mỗi tay) từ webcam, hoàn toàn trên máy bạn |
 | **Nhận diện cử chỉ** | Các bộ phân loại tự viết biến điểm mốc thành tư thế (nắm, mở, chỉ, chụm, chữ V), bộ nhận diện cú búng tay, xoay/nghiêng tay và thu phóng hai tay, rồi đưa qua bộ lọc nhiễu và máy trạng thái |
 | **Hệ thống hạt** | Bộ render WebGL2 tự viết. Vật lý hạt chạy trên GPU bằng transform feedback: không Three.js, không game engine, không framework |
-| **Mô hình** | 34 mô hình procedural dựng từ số đo thực rồi lấy mẫu thành đám mây điểm, có các bộ phận được đặt tên, có thể nổ tung, phát sáng và kéo ra |
+| **Mô hình** | 41 mô hình procedural dựng từ số đo thực rồi lấy mẫu thành đám mây điểm, có các bộ phận được đặt tên, có thể nổ tung, phát sáng và kéo ra |
 | **Server** | Một server tĩnh Node.js không phụ thuộc thư viện nào (`server.mjs`) |
 
 Không có gì được gửi đi đâu cả: video không bao giờ rời khỏi máy bạn.
@@ -88,6 +88,7 @@ Nhấp chuột vào một bộ phận để chọn, kéo chuột để xoay.
 | **Động cơ (4)** | Động cơ thẳng hàng 4 xi-lanh, HEMI V8 tăng áp, Động cơ phản lực turbofan, Động cơ hình sao 9 xi-lanh |
 | **Phương tiện (4)** | Xe thể thao, Xe máy, Máy bay chở khách, Tên lửa Saturn V (có tách tầng) |
 | **Máy móc (3)** | Đồng hồ cơ đeo tay, Bộ pin xe điện (280 cell, thanh dẫn, làm mát, BMS), Robot AI (chip NPU, pin, servo, camera, lõi năng lượng) |
+| **Trí tuệ nhân tạo (7)** | Mạng nơ-ron, Mạng tích chập (CNN), Transformer (LLM), Nơ-ron sinh học và nhân tạo, Chip GPU AI, Xe tự lái, Trung tâm dữ liệu AI |
 
 ## Độ nhạy cử chỉ
 

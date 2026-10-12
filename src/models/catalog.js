@@ -8,6 +8,7 @@ import { ANATOMY2 } from './anatomy2.js';
 import { BODY } from './body.js';
 import { BIOLOGY } from './biology.js';
 import { VEHICLES2, MACHINES } from './machines.js';
+import { AI } from './ai.js';
 import { makeRng } from '../lib/rng.js';
 import { build, flatten, allocate, shuffleIndex, normalize } from '../lib/sampling.js';
 
@@ -18,6 +19,7 @@ export const CATALOG = [
   ...ENGINES.map((e) => ({ ...e, kind: 'machine', category: 'Engines' })),
   ...[...VEHICLES, ...VEHICLES2].map((v) => ({ ...v, kind: 'machine', category: 'Vehicles' })),
   ...MACHINES.map((m) => ({ ...m, kind: 'machine', category: 'Machines' })),
+  ...AI.map((m) => ({ ...m, kind: 'machine', category: 'AI' })),
 ];
 
 export const isMachine = (i) => CATALOG[i]?.kind === 'machine';
@@ -80,7 +82,7 @@ export function buildModel(index, n, seed = 0) {
     const x = target[j] + offset[o] - exCenter[0], y = target[j + 1] + offset[o + 1] - exCenter[1], z = target[j + 2] + offset[o + 2] - exCenter[2];
     r2 = Math.max(r2, x * x + y * y + z * z);
   }
-  const fitScale = Math.min(1, FIT_RADIUS / Math.sqrt(r2));
+  const fitScale = Math.min(1, (def.fit ?? FIT_RADIUS) / Math.sqrt(r2));   // def.fit: wide models stay clear of the left panel
   const labels = [], labelOf = new Array(groups.length).fill(-1);
   groups.forEach((g, gi) => {
     if (g.showLabel === false || gs[gi].count === 0) return;

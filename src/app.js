@@ -36,7 +36,7 @@ const POSE_UI = { [OPEN]: ['✋', 'Mở tay'], [FIST]: ['✊', 'Nắm tay'], [PE
 const POSE_COLOR = { [OPEN]: '#66e0ff', [FIST]: '#ffd166', [PEACE]: '#ff6bd6', [POINT]: '#7dff9b', other: '#e8f1ff', [NONE]: '#e8f1ff' };
 const rgbCss = (c, a = 1) => `rgba(${Math.round(c[0] * 255)}, ${Math.round(c[1] * 255)}, ${Math.round(c[2] * 255)}, ${a})`;
 const CATEGORIES = [...new Set(CATALOG.map((d) => d.category))];
-const CAT_VI = { Wonders: 'Kỳ quan', Anatomy: 'Giải phẫu', Biology: 'Sinh học', Engines: 'Động cơ', Vehicles: 'Phương tiện', Machines: 'Máy móc' };
+const CAT_VI = { Wonders: 'Kỳ quan', Anatomy: 'Giải phẫu', Biology: 'Sinh học', Engines: 'Động cơ', Vehicles: 'Phương tiện', Machines: 'Máy móc', AI: 'Trí tuệ nhân tạo' };
 const STATE_VI = { idle: 'chờ', sphere: 'hình cầu', formed: 'đã dựng', dissolve: 'đang tan' };
 
 // ---------------------------------------------------------------- model cache (built in a worker)
