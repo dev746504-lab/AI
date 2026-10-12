@@ -108,18 +108,18 @@ function neurons() {
 // ============================================================ 5. AI GPU CHIP (package seen from the side, layers stack along y)
 function gpu() {
   const cores = [], tensor = [];
-  for (const i of linspace(-25, 25, 6)) for (const j of linspace(-25, 25, 6)) if (Math.abs(i) > 8 || Math.abs(j) > 8) cores.push(box([i, -7, j], [7, 3, 7], 0.35, 2));
-  for (const i of [-5, 5]) for (const j of [-5, 5]) tensor.push(box([i, -7, j], [8, 4, 8], 0.5, 2));
+  for (const i of linspace(-25, 25, 6)) for (const j of linspace(-25, 25, 6)) if (Math.abs(i) > 8 || Math.abs(j) > 8) cores.push(box([i, -7, j], [7, 3, 7], 0.7, 2));
+  for (const i of [-5, 5]) for (const j of [-5, 5]) tensor.push(box([i, -7, j], [8, 4, 8], 1.5, 3));
   const hbm = (x) => [0, 1, 2, 3].map((k) => slab([x, -13 + k * 2.5, 0], [16, 1.6, 34], 0.4));
   const bga = linspace(-65, 65, 12).flatMap((x) => linspace(-65, 65, 12).map((z) => [x, -28, z]));
-  const fins = linspace(-48, 48, 12).map((x) => box([x, 24, 0], [1.5, 26, 100], 0.2, 2));
+  const fins = linspace(-48, 48, 12).map((x) => box([x, 24, 0], [1.5, 26, 100], 0.08, 1));
   const blades = Array.from({ length: 7 }, (_, k) => { const a = (k / 7) * TAU; return line([0, 52, 0], [30 * Math.cos(a + 0.6), 52, 30 * Math.sin(a + 0.6)], 0, 3); });
   const vrm = [];
-  for (const x of [-62, 62]) for (const z of [-62, 62]) vrm.push(box([x, -18, z], [14, 9, 14], 1, 3), torus([x, -11, z], 4, 1.2, Y, 2));
-  return [
-    G('Package substrate (PCB)', COL.green, [0, -75, 0], 0, slab([0, -24, 0], [150, 5, 150], 0.4), { info: 'bo mạch của gói chip, dẫn điện và tín hiệu ra ngoài' }),
+  for (const x of [-62, 62]) for (const z of [-62, 62]) vrm.push(box([x, -18, z], [14, 9, 14], 0.5, 2), torus([x, -11, z], 4, 1.2, Y, 2));
+  const out = [
+    G('Package substrate (PCB)', COL.green, [0, -75, 0], 0, slab([0, -24, 0], [150, 5, 150], 0.1), { info: 'bo mạch của gói chip, dẫn điện và tín hiệu ra ngoài' }),
     G('Solder balls (BGA)', COL.silver, [0, -105, 0], 0.05, dots(bga, 1.2, 1.5), { info: 'hàng trăm bi hàn nối chip với bo mạch chủ' }),
-    G('Interposer', COL.teal, [0, -50, 0], 0.1, slab([0, -17, 0], [120, 2, 110], 0.5), { info: 'tấm silicon nối GPU với bộ nhớ bằng hàng nghìn đường dây ngắn' }),
+    G('Interposer', COL.teal, [0, -50, 0], 0.1, slab([0, -17, 0], [120, 2, 110], 0.1), { info: 'tấm silicon nối GPU với bộ nhớ bằng hàng nghìn đường dây ngắn' }),
     G('Silicon die', COL.cyan, [0, -25, 0], 0.15, slab([0, -12, 0], [70, 4, 70], 0.3), { info: 'lõi chip: hàng chục tỷ bóng bán dẫn trên một mảnh silicon' }),
     G('CUDA cores', COL.lime, [0, 8, 0], 0.2, cores, { info: 'hàng nghìn lõi nhỏ tính song song, hợp với việc nhân ma trận' }),
     G('Tensor cores', COL.orange, [0, 40, 0], 0.25, tensor, { info: 'lõi chuyên nhân ma trận cho AI, nhanh hơn lõi thường nhiều lần' }),
@@ -127,28 +127,30 @@ function gpu() {
     G('HBM memory', COL.purple, [75, 10, 0], 0.2, hbm(52), { info: 'bộ nhớ băng thông cao xếp chồng, chứa trọng số của mô hình' }),
     G('HBM memory (L)', COL.purple, [-75, 10, 0], 0.2, hbm(-52), { showLabel: false }),
     G('Voltage regulators (VRM)', COL.gold, [0, -30, 100], 0.3, vrm, { info: 'hạ điện áp xuống mức chip cần, cấp hàng trăm ampe' }),
-    G('Heat spreader (lid)', COL.silver, [0, 55, 0], 0.15, slab([0, 6, 0], [100, 2, 100], 0.25), { info: 'nắp kim loại dàn đều nhiệt từ chip ra ngoài' }),
+    G('Heat spreader (lid)', COL.silver, [0, 55, 0], 0.15, slab([0, 6, 0], [100, 2, 100], 0.1), { info: 'nắp kim loại dàn đều nhiệt từ chip ra ngoài' }),
     G('Heat sink fins', COL.ice, [0, 90, 0], 0.2, fins, { info: 'các lá tản nhiệt tăng diện tích để thải nhiệt ra không khí' }),
     G('Cooling fan', COL.teal, [0, 130, 0], 0.25, [ring([0, 52, 0], 30, { density: 3 }), disc([0, 52, 0], 0, 5, Y, 2), blades], { info: 'quạt thổi gió qua lá tản nhiệt để chip không quá nóng' }),
   ];
+  for (const g of out) g.offset[1] *= 1.6;                          // wide stack: spread the layers so they do not overlap on screen
+  return out;
 }
 
 // ============================================================ 6. SELF-DRIVING CAR (x forward, cm)
 function selfDrivingCar() {
-  const wheels = (s) => [-140, 140].flatMap((x) => [torus([x, 25, s * 95], 25, 8, Z, 0.7), disc([x, 25, s * 95], 0, 12, Z, 0.5)]);
+  const wheels = (s) => [-140, 140].flatMap((x) => [torus([x, 25, s * 95], 25, 8, Z, 0.3), disc([x, 25, s * 95], 0, 12, Z, 0.25)]);
   const cams = [[105, 98, 0], [-125, 98, 0], [50, 90, 82], [50, 90, -82], [-60, 90, 82], [-60, 90, -82]].map(([x, y, z]) => box([x, y, z], [8, 6, 8], 1.2, 3));
   const radar = [[222, 38, 0], [210, 38, 70], [210, 38, -70], [-222, 38, 0], [-210, 38, 70], [-210, 38, -70]].map(([x, y, z]) => box([x, y, z], [6, 10, 24], 1, 3));
   const sonar = [...linspace(-70, 70, 6).map((z) => [226, 28, z]), ...linspace(-70, 70, 6).map((z) => [-226, 28, z])];
   const cone = (x0, len, half) => [line([x0, 40, 0], [x0 + len, 40, half], 0, 2), line([x0, 40, 0], [x0 + len, 40, -half], 0, 2), polyline(linspace(-1, 1, 12).map((t) => [x0 + len, 40, half * t]), 0, 2)];
   const comp = [box([-130, 35, 0], [44, 12, 36], 1.2, 3), ring([-130, 42, 0], 12, { density: 4 }), ...linspace(-14, 14, 5).map((z) => line([-146, 41, z], [-114, 41, z], 0, 2))];
-  const grid = linspace(-80, 80, 6).map((x) => line([x, 22.5, -55], [x, 22.5, 55], 0, 1.5));
+  const grid = linspace(-80, 80, 6).map((x) => line([x, 22.5, -55], [x, 22.5, 55], 0, 0.8));
   const spokes = Array.from({ length: 10 }, (_, k) => { const a = (k / 10) * TAU; return line([14 * Math.cos(a), 128, 14 * Math.sin(a)], [95 * Math.cos(a), 128, 95 * Math.sin(a)], 0, 1.2); });
   return [
     G('Body shell', COL.steel, [0, 70, 0], 0, [blob([0, 52, 0], [220, 26, 88], { density: 0.15 }), blob([-15, 92, 0], [105, 26, 72], { density: 0.15 })], { info: 'vỏ xe che chắn, sensor được gắn khéo trên đó' }),
-    G('Chassis & battery', COL.green, [0, -70, 0], 0.05, [slab([0, 18, 0], [260, 10, 150], 0.5), slab([0, 14, 0], [200, 6, 120], 0.6), grid], { info: 'khung xe kèm pin nằm sát sàn để xe thấp và vững' }),
+    G('Chassis & battery', COL.green, [0, -70, 0], 0.05, [slab([0, 18, 0], [260, 10, 150], 0.12), slab([0, 14, 0], [200, 6, 120], 0.2), grid], { info: 'khung xe kèm pin nằm sát sàn để xe thấp và vững' }),
     G('Wheels', COL.white, [0, -15, 95], 0.1, wheels(1), { info: 'bánh xe có cảm biến tốc độ để tính quãng đường đã đi' }),
     G('Wheels (L)', COL.white, [0, -15, -95], 0.1, wheels(-1), { showLabel: false }),
-    G('Electric motor & axle', COL.orange, [0, -60, 0], 0.2, [tube([140, 25, -60], [140, 25, 60], 9, 9, 1.4), tube([-140, 25, -60], [-140, 25, 60], 9, 9, 1.4), cylinder([140, 25, 0], 16, 28, { density: 0.8 })], { info: 'động cơ điện truyền lực xuống bánh theo lệnh của máy tính' }),
+    G('Electric motor & axle', COL.orange, [0, -60, 0], 0.2, [tube([140, 25, -60], [140, 25, 60], 9, 9, 0.5), tube([-140, 25, -60], [-140, 25, 60], 9, 9, 0.5), cylinder([140, 25, 0], 16, 28, { density: 0.3 })], { info: 'động cơ điện truyền lực xuống bánh theo lệnh của máy tính' }),
     G('Lidar', COL.magenta, [0, 95, 0], 0.2, [cylinder([0, 118, 0], 14, 12, { cap: true, density: 1 }), ring([0, 131, 0], 14, { density: 5 })], { info: 'quay liên tục, bắn tia laser để đo khoảng cách ra bản đồ 3D' }),
     G('Lidar scan field', COL.red, [0, 125, 0], 0.25, [ring([0, 128, 0], 95, { density: 2 }), spokes], { info: 'vùng xung quanh xe mà lidar quét, tạo đám mây điểm 3D' }),
     G('Cameras', COL.cyan, [30, 45, 0], 0.15, cams, { info: 'đọc biển báo, vạch kẻ đường, đèn giao thông và người đi bộ' }),
@@ -191,7 +193,7 @@ export const AI = [
   { name: 'Convolutional Neural Network', fit: 1.0, groups: cnn, color: [0.45, 1.0, 0.8], tilt: 10, viewYaw: 0.5, fact: 'ảnh → bộ lọc → pooling → kết nối đầy đủ → nhãn' },
   { name: 'Transformer (LLM)', groups: transformer, color: [1.0, 0.65, 0.3], tilt: 8, viewYaw: 0.5, fact: 'attention · lặp nhiều tầng · đoán từ kế tiếp' },
   { name: 'Biological vs Artificial Neuron', fit: 1.0, groups: neurons, color: [1.0, 0.5, 0.8], tilt: 10, viewYaw: 0.4, fact: 'trên: nơ-ron thật · dưới: nơ-ron nhân tạo' },
-  { name: 'AI GPU Chip', groups: gpu, color: [0.5, 1.0, 0.45], tilt: 22, viewYaw: 0.5, fact: 'hàng chục tỷ bóng bán dẫn · lõi tensor · bộ nhớ HBM' },
+  { name: 'AI GPU Chip', groups: gpu, color: [0.5, 1.0, 0.45], tilt: 8, viewYaw: 0.5, fact: 'hàng chục tỷ bóng bán dẫn · lõi tensor · bộ nhớ HBM' },
   { name: 'Self-driving Car', groups: selfDrivingCar, color: [0.45, 0.7, 1.0], tilt: 16, viewYaw: 0.75, fact: 'lidar · radar · camera · máy tính AI' },
   { name: 'AI Data Center', groups: dataCenter, color: [0.6, 0.85, 1.0], tilt: 35, viewYaw: 0.6, fact: 'hàng nghìn GPU · làm mát · điện dự phòng' },
 ];
