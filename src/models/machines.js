@@ -244,6 +244,70 @@ function batteryPack() {
   ];
 }
 
+// ============================================================ AI HUMANOID ROBOT (cm, y up, faces +z)
+function aiRobot() {
+  const ball = (c, r) => blob(c, [r, r, r], { density: 0.5 });
+  const front = (x, y, z) => z > 0, back = (x, y, z) => z <= 0;
+  const chip = [box([0, 158, -2], [9, 9, 3], 1.5, 3)];
+  for (const k of linspace(-3.5, 3.5, 5)) chip.push(line([k, 163.5, -2], [k, 165.5, -2], 0, 2), line([k, 152.5, -2], [k, 150.5, -2], 0, 2), line([-4.5, 158 + k, -2], [-6.5, 158 + k, -2], 0, 2), line([4.5, 158 + k, -2], [6.5, 158 + k, -2], 0, 2));
+  chip.push(dots(linspace(-3, 3, 4).flatMap((x) => linspace(-3, 3, 4).map((y) => [x, 158 + y, -0.4])), 0.35, 2));
+  const eyes = [], mics = [];
+  for (const s of [-1, 1]) {
+    eyes.push(orient(ring([0, 0, 0], 3, { density: 6 }), Z, [s * 5, 160, 12.4]), disc([s * 5, 160, 12.4], 0, 1.6, Z, 3), dots([[s * 5, 160, 12.6]], 0.5, 2));
+    mics.push(disc([s * 12.2, 157, 0], 0, 3.2, X, 2), orient(ring([0, 0, 0], 3.2, { density: 5 }), X, [s * 12.4, 157, 0]));
+  }
+  const spine = [vessel([[0, 143, -5], [0, 128, -7], [0, 112, -7], [0, 98, -4]], 1.5, 1.5, 2)];
+  for (const s of [-1, 1]) spine.push(vessel([[s * 3, 142, -5], [s * 9, 126, -8], [s * 9, 108, -8], [s * 4, 97, -4]], 0.6, 0.6, 2.5));
+  const battery = [box([0, 112, -4], [22, 24, 8], 0.6, 2)];
+  for (let y = 102; y <= 122; y += 4) battery.push(line([-10, y, -0.2], [10, y, -0.2], 0, 2));
+  const fan = [orient(ring([0, 0, 0], 7, { density: 5 }), Z, [0, 134, -8.5]), disc([0, 134, -8.5], 0, 1.4, Z, 3)];
+  for (let k = 0; k < 6; k++) { const a = (k / 6) * TAU; fan.push(line([0, 134, -8.5], [6.2 * Math.cos(a + 0.5), 134 + 6.2 * Math.sin(a + 0.5), -8.5], 0, 3)); }
+  const core = [orient(ring([0, 0, 0], 5, { density: 7 }), Z, [0, 128, 7]), torus([0, 128, 7], 3, 0.5, Z, 3), dots([[0, 128, 7]], 1.4, 4)];
+  const shoulders = (s) => [ball([s * 24, 138, 0], 5), gear([s * 24, 138, 0], 6.5, 14, { axis: Z, width: 3, density: 2 })];
+  const arm = (s) => [tube([s * 24, 136, 0], [s * 30, 112, 0], 4.6, 4, 0.4), ball([s * 30, 111, 0], 4.4), tube([s * 30, 110, 0], [s * 34, 90, 6], 4, 3.2, 0.4)];
+  const hand = (s) => {
+    const h = [box([s * 35, 85, 7], [7, 8, 3], 0.6, 2)];
+    for (const k of linspace(-2.8, 2.8, 4)) h.push(line([s * 35 + k, 80, 7], [s * 35 + k * 1.1, 73, 8.5], 0, 3));
+    h.push(line([s * 35 + s * 3.5, 84, 7], [s * 35 + s * 7, 79, 9], 0, 3));
+    return h;
+  };
+  const leg = (s) => [tube([s * 10, 88, 0], [s * 11, 50, 2], 6, 5, 0.4), ball([s * 11, 49, 2], 5), tube([s * 11, 48, 2], [s * 11, 9, 0], 5, 3.8, 0.4)];
+  const foot = (s) => [box([s * 11, 4, 6], [11, 8, 26], 0.4, 2), tube([s * 11, 9, 0], [s * 11, 8, 0], 4.2, 4.2, 1.5)];
+  const servos = [];
+  for (const s of [-1, 1]) for (const [x, y, z] of [[s * 24, 130, -6], [s * 30, 112, -6], [s * 10, 88, -8], [s * 11, 50, -6]]) {
+    servos.push(box([x, y, z], [7, 8, 6], 0.7, 2), gear([x, y, z + 3.2], 2.6, 10, { axis: Z, width: 1.2, density: 2.5 }));
+  }
+  const antenna = [tube([6, 169, -4], [9, 184, -4], 0.7, 0.4, 2), dots([[9, 184.5, -4]], 1, 3), torus([9, 184, -4], 2.5, 0.25, Y, 2)];
+  const out = [
+    G('Head shell', COL.ice, [0, 75, 0], 0, [blob([0, 158, 0], [12, 14, 12], { density: 0.3 }), blob([0, 160, 9], [10, 6.5, 4], { density: 0.7 })], { info: 'vỏ đầu bảo vệ bộ não điện tử' }),
+    G('Camera eyes', COL.cyan, [0, 8, 95], 0.1, eyes, { info: 'thấy thế giới và nhận ra khuôn mặt, vật thể' }),
+    G('Microphones & speakers', COL.amber, [0, 40, 0], 0.15, mics, { info: 'nghe lệnh và nói chuyện với bạn' }),
+    G('AI processor (NPU)', COL.magenta, [0, 100, -30], 0.2, chip, { info: 'bộ não: chạy mạng nơ-ron để hiểu và quyết định' }),
+    G('Wi-Fi / 5G antenna', COL.lime, [55, 70, 0], 0.1, antenna, { info: 'kết nối mạng, tải mô hình AI và cập nhật' }),
+    G('Neck joint', COL.silver, [0, 38, 0], 0.15, [vessel([[0, 146, 0], [0, 140, 0]], 4, 4.4, 2), torus([0, 143, 0], 4.4, 0.8, Y, 2)], { info: 'xoay và gật đầu theo hướng nhìn' }),
+    G('Chest plate (front)', COL.steel, [0, 0, 120], 0.05, blob([0, 122, 0], [19, 25, 10], { density: 0.25, keep: front }), { info: 'tấm giáp ngực bảo vệ các bộ phận bên trong' }),
+    G('Back plate', COL.ice, [0, 0, -120], 0.05, blob([0, 122, 0], [19, 25, 10], { density: 0.25, keep: back }), { info: 'tấm lưng, có cửa thay pin' }),
+    G('Energy core', COL.orange, [0, 55, 55], 0.25, core, { info: 'lõi năng lượng cấp điện cho cảm biến và bộ xử lý' }),
+    G('Battery pack', COL.green, [0, -50, -50], 0.3, battery, { info: 'pin lithium 48 V, chạy khoảng 4 giờ' }),
+    G('Cooling fan', COL.teal, [0, 45, -85], 0.2, fan, { info: 'làm mát chip AI để không quá nhiệt' }),
+    G('Spine & cabling', COL.gold, [0, -20, -20], 0.35, spine, { info: 'dây dẫn điện và tín hiệu chạy khắp cơ thể' }),
+    G('Pelvis frame', COL.steel, [0, -50, 0], 0.15, [box([0, 92, 0], [26, 10, 15], 0.5, 2), disc([0, 92, 0], 0, 5, Z, 1.5)], { info: 'khung hông nối thân với hai chân' }),
+    G('Servo motors', COL.red, [0, -10, -75], 0.4, servos, { info: '22 động cơ servo tạo chuyển động ở mỗi khớp' }),
+  ];
+  for (const [name, color, off, stage, f, info] of [
+    ['Shoulder joint', COL.silver, [100, 60, 0], 0.1, shoulders, 'khớp vai xoay cánh tay theo mọi hướng'],
+    ['Arm', COL.steel, [120, 10, 0], 0.15, arm, 'cánh tay và khuỷu tay, mang tải đến 5 kg'],
+    ['Hand', COL.pink, [120, -40, 25], 0.25, hand, 'bàn tay 5 ngón để cầm nắm đồ vật'],
+    ['Leg', COL.steel, [80, -30, 0], 0.15, leg, 'đùi, đầu gối và cẳng chân giữ thăng bằng khi đi'],
+    ['Foot', COL.purple, [95, -70, 35], 0.2, foot, 'bàn chân có cảm biến lực để biết đang đứng vững hay không'],
+  ]) {
+    out.push(G(name, color, off, stage, f(1), { info }));
+    out.push(G(name + ' (L)', color, [-off[0], off[1], off[2]], stage, f(-1), { showLabel: false }));
+  }
+  for (const g of out) g.offset = g.offset.map((v) => v * 0.6);   // keep the exploded view compact so the robot stays big on screen
+  return out;
+}
+
 export const VEHICLES2 = [
   { name: 'Motorcycle', groups: motorcycle, color: [1.0, 0.35, 0.25], tilt: 12, viewYaw: 0.7, fact: '210 cm · V-twin · truyền động xích' },
   { name: 'Airliner', groups: airliner, color: [0.6, 0.8, 1.0], tilt: 18, viewYaw: 0.6, fact: 'dài 37,6 m · sải cánh 34 m · 180 chỗ ngồi' },
@@ -252,4 +316,5 @@ export const VEHICLES2 = [
 export const MACHINES = [
   { name: 'Mechanical Watch', groups: wristwatch, color: [1.0, 0.8, 0.4], tilt: 28, viewYaw: 0.9, fact: '40 mm · 28.800 nhịp mỗi giờ · trữ năng lượng ~40 giờ' },
   { name: 'EV Battery Pack', groups: batteryPack, color: [0.4, 0.8, 1.0], tilt: 30, viewYaw: 0.5, fact: '8 mô-đun · 280 cell · ~400 V' },
+  { name: 'AI Robot', groups: aiRobot, color: [0.55, 0.85, 1.0], tilt: 8, viewYaw: 0.5, fact: '170 cm · 22 động cơ servo · chip AI + pin 48 V' },
 ];
