@@ -153,7 +153,7 @@ class App {
     const w = innerWidth, h = innerHeight, dpr = CFG.dpr;
     for (const c of [this.canvas, this.overlay]) { c.width = Math.round(w * dpr); c.height = Math.round(h * dpr); }
     const aspect = w / h, wide = aspect > 1.25 && w > 820;
-    this.offX = wide ? 0.9 * Math.min(1.15, aspect / 1.78) : 0;       // the model sits in the right third (like the demo)
+    this.offX = 0;                                                    // model centred; was `wide ? 0.9 * Math.min(1.15, aspect / 1.78) : 0` (right third, clear of the left panel)
     this.offY = wide ? 0 : 0.22;
     this.dist = Math.max(3.4, 1.25 / (Math.tan((20 * Math.PI) / 180) * aspect));
     this.proj = perspective(40, aspect, 0.05, 30);
